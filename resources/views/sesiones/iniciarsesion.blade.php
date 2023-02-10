@@ -10,8 +10,8 @@
         <form action="#" class="border p-3 form">
             <center><img src="{{ asset('img/user.png') }}" alt="" width="100px" height="100px"></center> <br>
             <div class="form-group">
-                <label for="usuario">Usuario</label>
-                <input type="text" name="usuario" id="usuario" class="form-control" required>
+                <label for="usuario">Correo</label>
+                <input type="email" name="correo" id="correo" class="form-control" required>
             </div>
             <label for="contrasenia">Contraseña</label>
             <div class="password-container">
