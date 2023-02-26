@@ -15,9 +15,7 @@ class ModulosController extends Controller
         return view('welcome');
     }
 
-    public function citas(){
-        return view('citas');
-    }
+     
     
     public function servicios(){
         return view('servicios');
