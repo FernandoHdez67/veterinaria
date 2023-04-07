@@ -4,7 +4,7 @@
 
 @section ('contenido')
 
-<div class="container">
+<div class="container" >
     <div class="abs-center-iniciodesesion">
 
         <form action="#" class="border p-3 form">

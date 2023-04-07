@@ -116,5 +116,3 @@ class RegistroController extends Controller
     }
 }
 
-
-

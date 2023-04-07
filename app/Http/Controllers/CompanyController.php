@@ -85,7 +85,7 @@ class CompanyController extends Controller
         
         $company->fill($request->post())->save();
 
-        return redirect()->route('companies.index')->with('success','Company Has Been updated successfully');
+        return redirect()->route('companies.index')->with('success','Compañia actualizada correctamente');
     }
 
     /**
@@ -97,6 +97,6 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         $company->delete();
-        return redirect()->route('companies.index')->with('success','Company has been deleted successfully');
+        return redirect()->route('companies.index')->with('success','Compañia eliminada exitosamente');
     }
 }

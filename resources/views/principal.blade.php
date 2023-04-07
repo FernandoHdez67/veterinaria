@@ -14,6 +14,18 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link rel="icon" href="{{ asset('img/icono.ico') }}">
+    <script src="{{ asset('js/desactivarclickderecho.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#div-btn1').on('click', function() {
+                $("#central").load('principal');
+                return false;
+            });
+            ...
+        });
+
+    </script>
     <title>@yield('title')</title>
 </head>
 
@@ -29,26 +41,26 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                     <li class="nav-item">
-                        <a style="color: white" class="nav-link active" aria-current="page"  href="<?= Route('inicio') ?>"><b><i class="fa-solid fa-house"></i> Inicio</b></a>
+                        <a id="div-btn1" style="color: white" class="nav-link active" aria-current="page" href="<?= Route('inicio') ?>"><b><i class="fa-solid fa-house"></i> Inicio</b></a>
                     </li>
                     <li class="nav-item">
-                        <a style="color: white" class="nav-link active" aria-current="page"  href="<?= Route('somos') ?>"><b><i class="fa-solid fa-circle-info"></i> Quienes somos</b></a>
+                        <a id="div-btn1" style="color: white" class="nav-link active" aria-current="page" href="<?= Route('somos') ?>"><b><i class="fa-solid fa-circle-info"></i> Quienes somos</b></a>
                     </li>
                     <li class="nav-item">
-                        <a style="color: white" class="nav-link active" aria-current="page"  href="{{ Route('productos') }}"><b><i class="fa-solid fa-shield-dog"></i> Productos</b></a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a style="color: white" class="nav-link active" aria-current="page"  href="<?= Route('servicios') ?>"><b><i class="fa-solid fa-syringe"></i> Nuestros Servicios</b></a>
+                        <a style="color: white" class="nav-link active" aria-current="page" href="{{ Route('productos') }}"><b><i class="fa-solid fa-shield-dog"></i> Productos</b></a>
                     </li>
 
                     <li class="nav-item">
-                        <a style="color: white" class="nav-link active" aria-current="page"  href="<?= Route('citas') ?>"><b><i class="fa-regular fa-calendar-days"></i> Citas</b></a>
+                        <a id="div-btn1" style="color: white" class="nav-link active" aria-current="page" href="<?= Route('servicios') ?>"><b><i class="fa-solid fa-syringe"></i> Nuestros Servicios</b></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="div-btn1" style="color: white" class="nav-link active" aria-current="page" href="<?= Route('citas') ?>"><b><i class="fa-regular fa-calendar-days"></i> Citas</b></a>
                     </li>
                 </ul>
                 <form class="d-flex">
-                    <a style="text-decoration: none; color:white" href="#"><img src="{{ asset('img/carrito.png') }}" width="30px" height="30px" alt=""><b style="margin-right: 10px"> Carrito</b></a>
-                    <a class="btn btn-rojopet" href="<?= Route('iniciarsesion')?>"><b style="color: white"><i class="fa-solid fa-right-to-bracket"></i> Inciar Sesión</b></a>
+                    <a id="div-btn1" style="text-decoration: none; color:white" href="#"><img src="{{ asset('img/carrito.png') }}" width="30px" height="30px" alt=""><b style="margin-right: 10px"> Carrito</b></a>
+                    <a id="div-btn1" class="btn btn-rojopet" href="<?= Route('iniciarsesion')?>"><b style="color: white"><i class="fa-solid fa-right-to-bracket"></i> Inciar Sesión</b></a>
                 </form>
             </div>
         </div>

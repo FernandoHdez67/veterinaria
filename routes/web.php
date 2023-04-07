@@ -41,6 +41,7 @@ Route::get('/usuarios', function () {
     return view('admin.admin_usuarios');
 })->middleware(['auth', 'verified'])->name('usuarios');
 
+
 // Route::get('/products', function () {
 //     return view('admin.admin_productos');
 // })->middleware(['auth', 'verified'])->name('products');
@@ -59,6 +60,9 @@ require __DIR__.'/auth.php';
 
 Route::get('/products',[App\Http\Controllers\ProductoControllerAdmin::class,'productos'])->name('products');
 
+Route::get('/users',[App\Http\Controllers\UsuariosControllerAdmin::class,'usuarios'])->name('users');
+
+
 Route::get('/productos',[App\Http\Controllers\ProductoController::class,'productos'])->name('productos');
 
 Route::get('/detalleproducto',[App\Http\Controllers\ProductoDetalle::class,'productos'])->name('detalle');
@@ -74,3 +78,7 @@ Route::resource('companies', CompanyController::class);
 // Route::get('/calendar',[App\Http\Controllers\CalendarController::class,'index'])->name('calendar');
 
 // Route::post('/registro', [CuentasController::class, 'store']);
+
+Route::get('/registerrr','RegisterController@showRegistrationForm');
+Route::post('/registerrr','RegisterController@register')->name('registerrr');
+
