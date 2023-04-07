@@ -198,6 +198,7 @@ return [
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
+
     /*
     |--------------------------------------------------------------------------
     | Sidebar
@@ -214,11 +215,11 @@ return [
     'sidebar_collapse' => false,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
-    'sidebar_collapse_remember_no_transition' => true,
+    'sidebar_collapse_remember_no_transition' => false,
     'sidebar_scrollbar_theme' => 'os-theme-light',
     'sidebar_scrollbar_auto_hide' => 'l',
     'sidebar_nav_accordion' => true,
-    'sidebar_nav_animation_speed' => 300,
+    'sidebar_nav_animation_speed' => 100,
 
     /*
     |--------------------------------------------------------------------------
@@ -235,7 +236,7 @@ return [
     'right_sidebar' => false,
     'right_sidebar_icon' => 'fas fa-cogs',
     'right_sidebar_theme' => 'dark',
-    'right_sidebar_slide' => true,
+    'right_sidebar_slide' => false,
     'right_sidebar_push' => true,
     'right_sidebar_scrollbar_theme' => 'os-theme-light',
     'right_sidebar_scrollbar_auto_hide' => 'l',
@@ -318,14 +319,34 @@ return [
             'icon' => 'fas fa-fw fa-home',
         ],
         [
-            'text' => 'Usuarios',
-            'route'  => 'users',
-            'icon' => 'fas fa-fw fa-user'
+            'text' => 'Citas',
+            'route'  => 'citass',
+            'icon' => 'fas fa-fw fa-calendar',
         ],
         [
             'text' => 'Productos',
             'route'  => 'products',
             'icon' => 'fas fa-fw fa-dog'
+        ],
+        [
+            'text' => 'Servicios',
+            'route'  => 'services',
+            'icon' => 'fas fa-fw fa-file'
+        ],
+        [
+            'text' => 'Usuarios',
+            'route'  => 'users',
+            'icon' => 'fas fa-fw fa-user'
+        ],
+        [
+            'text' => 'Carrucel',
+            'route'  => 'carruceladmin',
+            'icon' => 'fas fa-fw fa-image'
+        ],
+        [
+            'text' => 'Ayuda al usuario',
+            'route'  => 'ayudaa',
+            'icon' => 'fas fa-fw fa-question'
         ],
         [
             'text' => 'Configuracion',

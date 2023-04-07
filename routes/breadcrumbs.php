@@ -8,6 +8,7 @@ use Diglactic\Breadcrumbs\Breadcrumbs;
 //  with `$trail`. This is nice for IDE type checking and completion.
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
+
 // Inicio
 Breadcrumbs::for('inicio', function (BreadcrumbTrail $trail) {
     $trail->push('Inicio', route('inicio'));
@@ -37,8 +38,14 @@ Breadcrumbs::for('citas', function (BreadcrumbTrail $trail) {
     $trail->push('Citas', route('citas'));
 });
 
-// Inicio > Productos > [Category]
-Breadcrumbs::for('category', function (BreadcrumbTrail $trail, $category) {
-    $trail->parent('productos');
-    $trail->push($category->title, route('category', $category));
+// Inicio > Citas
+Breadcrumbs::for('ayuda', function (BreadcrumbTrail $trail) {
+    $trail->parent('inicio');
+    $trail->push('Ayuda', route('ayuda'));
 });
+
+// Inicio > Productos > [Category]
+// Breadcrumbs::for('detalles', function (BreadcrumbTrail $trail, Detalles $detalles) {
+//     $trail->parent('productos');
+//     $trail->push($detalles->nombre, route('detalles', $detalles)); // Agrega el nombre del producto como último elemento
+// });

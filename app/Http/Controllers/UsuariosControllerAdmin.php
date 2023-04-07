@@ -18,15 +18,15 @@ class UsuariosControllerAdmin extends Controller
     {
         $texto=trim($request->get('texto'));
         $usuarios=DB::table('tbl_usuarios')
-               ->select('idusuarios','nombre','apaterno','amaterno','telefono','correo', 'direccion', 'nombre_usuario', 'contrasenia')
+               ->select('idusuario','nombre','apaterno','amaterno','telefono','email', 'direccion', 'nombre_usuario', 'password')
                ->where('nombre','LIKE','%'.$texto.'%')
                ->orWhere('apaterno','LIKE','%'.$texto.'%')
                ->orWhere('amaterno','LIKE','%'.$texto.'%')
                ->orWhere('telefono','LIKE','%'.$texto.'%')
-               ->orWhere('correo','LIKE','%'.$texto.'%')
+               ->orWhere('email','LIKE','%'.$texto.'%')
                ->orWhere('direccion','LIKE','%'.$texto.'%')
                ->orWhere('nombre_usuario','LIKE','%'.$texto.'%')
-               ->orWhere('contrasenia','LIKE','%'.$texto.'%')
+               ->orWhere('password','LIKE','%'.$texto.'%')
                ->orderBy('nombre','asc')
                ->paginate(30);
         return view('admin.admin_usuarios',compact('usuarios','texto'));

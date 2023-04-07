@@ -11,18 +11,14 @@ use App\Models\ModelModulos;
 
 class ModulosController extends Controller
 {
-    public function index(){
-        return view('welcome');
+ 
+
+    public function ayuda(){
+        return view('ayuda');
     }
 
-     
-    
-    public function servicios(){
-        return view('servicios');
-    }
-
-    public function somos(){
-        return view('somos');
+    public function carrito(){
+        return view('carrito');
     }
 
 }

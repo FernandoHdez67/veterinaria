@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
 
 class ResetPasswordController extends Controller
 {
@@ -26,5 +28,34 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+
+
+    public function showResetForm(Request $request, $token = null)
+    {
+        return view('auth.passwords.reset')->with(
+            ['token' => $token, 'email' => $request->email]
+        );
+    }
+
+    protected function sendResetResponse($response)
+    {
+        return redirect()->route('iniciarsesion')->with('status', trans($response));
+    }
+    
+
+    public function reset(Request $request)
+    {
+        $request->validate($this->rules(), $this->validationErrorMessages());
+
+        $response = $this->broker()->reset(
+            $this->credentials($request),
+            function ($user, $password) {
+                $this->resetPassword($user, $password);
+            }
+        );
+
+        return $response == Password::PASSWORD_RESET
+            ? $this->sendResetResponse($response)
+            : $this->sendResetFailedResponse($request, $response);
+    }
 }

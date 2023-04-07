@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\sf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Detalles;
+use App\Models\Producto;
+use Diglactic\Breadcrumbs\Breadcrumbs;
+
+use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
 class ProductoDetalle extends Controller
 {
@@ -13,19 +18,15 @@ class ProductoDetalle extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function productos(Request $request)
+    public function detalles($idproducto)
     {
-        // $texto=trim($request->get('texto'));
-        // $productos=DB::table('tbl_productos')
-        //        ->select('idproducto','nombre','precio','cantidad','descripcion','imagen')
-        //        ->where('nombre','LIKE','%'.$texto.'%')
-        //        ->orWhere('precio','LIKE','%'.$texto.'%')
-        //        ->orWhere('cantidad','LIKE','%'.$texto.'%')
-        //        ->orWhere('descripcion','LIKE','%'.$texto.'%')
-        //        ->orderBy('nombre','asc')
-        //        ->paginate(30);
-        // return view('modulos.detalle_producto',compact('productos','texto'));
+        $producto = DB::table('tbl_productos')->where('idproducto', $idproducto)->first();
+
+        return view('modulos.detalles', compact('producto', 'idproducto'));
     }
+
+
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -53,10 +54,7 @@ class ProductoDetalle extends Controller
      * @param  \App\Models\sf  $sf
      * @return \Illuminate\Http\Response
      */
-    public function show(sf $sf)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.

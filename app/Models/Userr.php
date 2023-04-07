@@ -9,5 +9,13 @@ class Userr extends Model
 {
 
     protected $table = 'tbl_usuarios';
-    protected $primaryKey = 'idusuarios';
+    protected $fillable = [
+        'nombre', 
+        'apaterno', 
+        'amaterno', 
+        'telefono', 
+        'email', 
+        'direccion', 
+        'nombre_usuario', 
+        'password'];
 }

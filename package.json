@@ -20,8 +20,11 @@
     },
     "dependencies": {
         "@vitejs/plugin-react": "^3.0.1",
+        "fullcalendar": "^6.1.4",
         "hover.css": "^2.3.2",
+        "quill": "^1.3.7",
         "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.2.0",
+        "tinymce": "^6.4.0"
     }
 }

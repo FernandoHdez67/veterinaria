@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Userr;
+
 
 class LoginController extends Controller
 {
@@ -18,6 +23,40 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
+
+    public function showLoginForm()
+    {
+        return view('sesiones.iniciarsesion');
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::guard('admin')->attempt($credentials)) {
+            return redirect()->intended('/dashboard');
+        }
+
+        if (Auth::guard('web')->attempt($credentials)) {
+            return redirect()->intended('/');
+        }
+
+        return redirect()->back()->withErrors([
+            'email' => 'Credenciales incorrectas.',
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/iniciarsesion');
+    }
+
 
     use AuthenticatesUsers;
 

@@ -23,14 +23,23 @@ class User extends Authenticatable
     //     'password',
     // ];
 
+
+    protected $table = 'users';
     protected $fillable  = [
-        'name', 
-        'email', 
-        'password', 
+        'name',
+        'email',
+        'password',
     ];
 
-    public function setPasswordAttribute($value){
-        $this->attributes['contrasenia'] = bcrypt($value);
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
     }
 
     /**
@@ -64,6 +73,6 @@ class User extends Authenticatable
 
     public function adminlte_profile_url()
     {
-        return 'profile/username';
+        return route('perfil');
     }
 }

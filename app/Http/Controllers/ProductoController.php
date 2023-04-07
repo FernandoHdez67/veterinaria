@@ -16,17 +16,36 @@ class ProductoController extends Controller
 
     public function productos(Request $request)
     {
-        $texto=trim($request->get('texto'));
-        $productos=DB::table('tbl_productos')
-               ->select('idproducto','nombre','precio','cantidad','descripcion','imagen')
-               ->where('nombre','LIKE','%'.$texto.'%')
-               ->orWhere('precio','LIKE','%'.$texto.'%')
-               ->orWhere('cantidad','LIKE','%'.$texto.'%')
-               ->orWhere('descripcion','LIKE','%'.$texto.'%')
-               ->orderBy('nombre','asc')
-               ->paginate(30);
-        return view('modulos.productos',compact('productos','texto'));
+        $texto = trim($request->get('texto'));
+        $productos = DB::table('tbl_productos')
+            ->select('idproducto', 'nombre', 'precio', 'cantidad', 'descripcion', 'imagen')
+            ->where('nombre', 'LIKE', '%' . $texto . '%')
+            ->orWhere('precio', 'LIKE', '%' . $texto . '%')
+            ->orWhere('cantidad', 'LIKE', '%' . $texto . '%')
+            ->orWhere('descripcion', 'LIKE', '%' . $texto . '%')
+            ->orderBy('nombre', 'asc')
+            ->paginate(30);
+        return view('modulos.productos', compact('productos', 'texto'));
     }
+
+
+    public function buscar(Request $request)
+    {
+        $texto = trim($request->get('texto'));
+        $ordenar = $request->get('ordenar');
+
+        $productos = DB::table('tbl_productos')
+            ->select('idproducto', 'nombre', 'precio', 'cantidad', 'descripcion', 'imagen')
+            ->where('nombre', 'LIKE', '%' . $texto . '%')
+            ->orWhere('precio', 'LIKE', '%' . $texto . '%')
+            ->orWhere('cantidad', 'LIKE', '%' . $texto . '%')
+            ->orWhere('descripcion', 'LIKE', '%' . $texto . '%')
+            ->orderByRaw($ordenar === 'precio_asc' ? 'precio ASC' : 'precio DESC')
+            ->paginate(30);
+
+        return view('modulos.productos', compact('productos', 'texto', 'ordenar'));
+    }
+
 
     /**
      * Show the form for creating a new resource.
