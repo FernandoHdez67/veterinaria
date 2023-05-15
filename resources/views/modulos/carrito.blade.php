@@ -10,6 +10,7 @@
     <center>
         <div>
             <h2>El carrito de compras está vacio!!</h2>
+            <a class="btn btn-" href="{{ route('productos') }}">Ver productos</a>
         </div>
     </center>
 </div>

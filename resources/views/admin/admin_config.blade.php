@@ -9,18 +9,24 @@
 @section('content')
 <div class="card">
     <div class="card-header">
+        @if (session('status'))
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+        </div>
+        @endif
         <div class="row">
             <div class="col-6">
-                <a class="btn btn-success" href="{{ route('respaldo.backup') }}">Realizar copia de seguridad</a>
+                <a class="btn btn-success" href="https://respaldo.proyectowebuni.com/php/" target="_blank">Base de datos</a>
+                {{-- <a class="btn btn-success" href="{{ route('respaldo.backup') }}">Realizar copia de seguridad</a> --}}
             </div>
             <div class="col-6">
-                <form method="POST" action="{{ route('restore-db') }}" enctype="multipart/form-data">
+                {{-- <form method="POST" action="{{ route('restore-db') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <input  class="form-control"  type="file" name="file" id="file" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Restaurar</button>
-                </form>
+                </form> --}}
             </div>
         </div>
     </div>

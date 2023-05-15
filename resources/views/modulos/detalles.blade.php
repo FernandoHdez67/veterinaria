@@ -3,6 +3,9 @@
 @section('title',"Detalle")
 
 @section ('contenido')
+<div class="breadcrumbs">
+    {{ Breadcrumbs::render('detalles', $detalles) }}
+</div>
 
 <div>
     <div class="container" style="margin-top: 8%">
@@ -15,15 +18,18 @@
                     <img src="{{ asset('imgproductos/'.$producto->imagen)}}" class="card-img-top" alt="" width="250px" height="200px"> <br>
                 </div>
                 <div class="col-md-6" style="margin-left:20px">
-                    <h5 class="card-title">{{ $producto->nombre }}</h5>
+                    <h5>Descripción</h5>
+                    <p class="card-title">{{ $producto->nombre }}</p>
                     <p class="card-text">{{ $producto->descripcion }}</p>
                     <p class="card-text">${{ $producto->precio }}</p>
-                    <p class="card-text">En existencia: {{ $producto->cantidad }}</p>
+                    <p class="card-text">Categoria: {{ $producto->categoria }}</p>
+                    <p class="card-text">Marca: {{ $producto->marca }}</p>
+                    <p style="color:gray" class="card-text">{{ $producto->cantidad }} productos en existencia </p>
                     <div class="input-group">
                         <span class="input-group-prepend">
                             <button class="btn btn-outline-secondary" type="button" id="menos">-</button>
                         </span>
-                        <input type="number" class="form-control" id="cantidad" name="cantidad" value="1">
+                        <input type="number" class="form-control-2" id="cantidad" name="cantidad" value="1">
                         <span class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" id="mas">+</button>
                         </span>
@@ -36,10 +42,10 @@
                     @endif
                     <div class="row">
                         <div class="col-md-4">
-                            <a id="div-btn1" href="#" class="btn btn-rojopet">Comprar ahora</a><br><br>
+                            <a id="div-btn1" href="#" class="btn btn-rojopet"><i class="fa-solid fa-shop"></i> Comprar ahora</a><br><br>
                         </div>
-                        <div class="col-md-4">
-                            <a id="div-btn1" href="#" class="btn btn-success">Agregar al carrito</a><br><br>
+                        <div class="col-md-6">
+                            <a id="div-btn1" href="#" class="btn btn-success"><i class="fa-solid fa-plus"></i> Agregar al carrito</a><br><br>
                         </div>
 
                     </div>

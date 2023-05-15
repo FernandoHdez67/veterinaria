@@ -28,7 +28,8 @@
                         <p><strong>Teléfono del propietario:</strong> <span id="telefono"></span></p>
                         <p><strong>Edad de la mascota:</strong> <span id="edad"></span> años</p>
                         <p><strong>Sexo de la mascota:</strong> <span id="sexo"></span></p>
-                        <p><strong>Fecha y hora de la cita:</strong> <span id="fechaHora"></span></p>
+                        <p><strong>Fecha de la cita:</strong> <span id="fecha"></span></p>
+                        <p><strong>Hora de la cita:</strong> <span id="hora"></span></p>
                         <p><strong>Razón de la cita:</strong> <span id="razon"></span></p>
                     </div>
                 </div>
@@ -36,10 +37,8 @@
         </div>
 
         <!-- Calendario -->
-        <div id='calendar'></div>
 
         <div id='calendar'></div>
-
 
     </div>
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Usuario;
 use App\Models\Usuarios;
 use App\Models\Carrucel;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -19,6 +20,7 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        $carrucel = Carrucel::all();
         $credentials = $request->only('email', 'password');
 
         $usuario = Usuarios::where('email', $credentials['email'])->first();
@@ -27,7 +29,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
             session(['idusuario' => $usuario->idusuario]);
 
-            return view('welcome', ['usuario' => $usuario]);
+            return view('welcome', ['usuario' => $usuario],['carrucel'=>$carrucel]);
         }
 
         return back()->withErrors([
@@ -37,11 +39,9 @@ class AuthController extends Controller
 
 
 
-    public function logout(Request $request)
+    public function logout()
     {
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
+        session()->forget('idusuario');
         return redirect()->route('iniciar');
     }
 }

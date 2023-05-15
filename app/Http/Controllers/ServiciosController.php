@@ -58,11 +58,11 @@ class ServiciosController extends Controller
     public function store(Request $request)
     {
         $messages = [
-            'tipo.required' => 'El campo Nombre es obligatorio.',
-            'tipo.max' => 'El campo Nombre no debe tener más de 255 caracteres.',
-            'descripcion.max' => 'El campo Descripción no debe tener más de :max caracteres.',
-            'imagen.required' => 'La Imagen es obligatorio.',
-            'imagen.image' => 'El archivo seleccionado debe ser una imagen.',
+            'tipo.required' => 'El Nombre es obligatorio.',
+            'tipo.max' => 'El Nombre no debe tener más de 255 caracteres.',
+            'descripcion.max' => 'La Descripción no debe tener más de :max caracteres.',
+            'imagen.required' => 'La Imagen es obligatoria.',
+            'imagen.image' => 'El archivo seleccionado no es una imagen.',
             'imagen.max' => 'El archivo seleccionado no debe ser más grande de 10 MB.',
         ];
     
@@ -119,18 +119,16 @@ class ServiciosController extends Controller
     public function update(Request $request, ServiciosModel $idservicio)
 {
     $messages = [
-        'tipo.required' => 'El campo Nombre es obligatorio.',
-        'tipo.max' => 'El campo Nombre no debe tener más de 255 caracteres.',
-        'descripcion.max' => 'El campo Descripción no debe tener más de :max caracteres.',
+        'tipo.required' => 'El Nombre es obligatorio.',
         'imagen.required' => 'La Imagen es obligatorio.',
         'imagen.image' => 'El archivo seleccionado debe ser una imagen.',
         'imagen.max' => 'El archivo seleccionado no debe ser más grande de 10 MB.',
     ];
 
     $request->validate([
-        'tipo' => 'required|string|max:255',
-        'descripcion' => 'nullable|string|max:255',
-        'imagen' => 'nullable|image|max:10240', // máximo 10 MB
+        'tipo' => 'required|string',
+        'descripcion' => 'required|string',
+        'imagen' => 'image|max:10240', // máximo 10 MB
     ], $messages);
 
     if ($request->hasFile('imagen')) {

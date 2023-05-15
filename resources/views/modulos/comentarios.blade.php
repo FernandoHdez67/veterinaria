@@ -6,6 +6,11 @@
 {{ Breadcrumbs::render('servicios') }}
 
 <div class="container">
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
     <center>
         <div class="col-md-6">
             <form action="{{ route('enviar') }}" method="POST">

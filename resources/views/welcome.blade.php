@@ -7,12 +7,12 @@
 
 <div class="container" style="margin-top: 15px">
     @if(session()->has('idusuario'))
-    <h5>Bienvenido, {{ $usuario->nombre }}!</h5>
+    <h5 class="d-flex justify-content-end">Bienvenido de nuevo!</h5>
     @else
-    <p>No has iniciado sesión.</p>
+    <p></p>
     @endif
-    
-    {{-- <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
 
             @foreach($carrucel as $key => $imagen)
@@ -34,41 +34,19 @@
             <span class="carousel-control-next-icon" style="background-color: #E15116" aria-hidden="true"></span>
             <span class="visually-hidden">Siguiente</span>
         </button>
-    </div> --}}
+    </div>
     <br><br>
 
-    <div class="row">
-        <div class="col-md-6">
-            <form action="{{ route('enviar') }}" method="POST">
-                @csrf
-                <div class="mb-3">
-                    <label for="nombre" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" required>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Correo:</label>
-                    <input type="email" class="form-control" id="correo" name="correo" required>
-                </div>
-                <div class="mb-3">
-                    <label for="comentario" class="form-label">Comentario:</label>
-                    <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-rojopet hvr-grow">Enviar comentario</button> <br><br>
-            </form>
-        </div> <br><br>
-        <div class="col-md-6">
-            <center>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d1860.6009328858565!2d-98.4089551018524!3d21.14436331628205!3m2!1i1024!2i768!4f13.1!2m1!1sclinica%20veterinaria%20cachorro%20pet%20huejutla!5e0!3m2!1ses!2smx!4v1678522752873!5m2!1ses!2smx" width="330" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </center>
-        </div>
 
-    </div>
+</div> <br><br>
 
+<center>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d1860.6009328858565!2d-98.4089551018524!3d21.14436331628205!3m2!1i1024!2i768!4f13.1!2m1!1sclinica%20veterinaria%20cachorro%20pet%20huejutla!5e0!3m2!1ses!2smx!4v1678522752873!5m2!1ses!2smx" width="330" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</center>
+< </div>
 
+    {{-- <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="4de9b006-20ff-4662-a907-7da749fc88e0" data-blockingmode="auto" type="text/javascript"></script>
+    <script id="CookieDeclaration" src="https://consent.cookiebot.com/4de9b006-20ff-4662-a907-7da749fc88e0/cd.js" type="text/javascript" async></script> --}}
+    <br><br>
 
-</div>
-{{-- <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="4de9b006-20ff-4662-a907-7da749fc88e0" data-blockingmode="auto" type="text/javascript"></script>
-<script id="CookieDeclaration" src="https://consent.cookiebot.com/4de9b006-20ff-4662-a907-7da749fc88e0/cd.js" type="text/javascript" async></script> --}}
-<br><br>
-
-@endsection
+    @endsection

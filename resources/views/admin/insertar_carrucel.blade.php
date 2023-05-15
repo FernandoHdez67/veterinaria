@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Configuracion')
+@section('title', 'Carrusel')
 
 @section('content_header')
 <h1>Agregar Imagen</h1>
@@ -24,13 +24,13 @@
                     
                     <div class="form-group">
                         <label for="imagen" class="form-label">Imagen</label>
-                        <input class="form-control" name="imagen" type="file" id="imagen">
+                        <input class="form-control" name="imagen" type="file" id="imagen" accept="image/jpeg, image/png">
                     </div>
 
 
                     <button type="submit" class="btn btn-success">Guardar</button>
 
-                    <a href="{{ route('carruceladmin') }}" class="btn btn-secondary">Cancelar</a>
+                    <a href="{{ route('carruseladmin') }}" class="btn btn-secondary">Cancelar</a>
 
             </div>
 

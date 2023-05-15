@@ -16,6 +16,17 @@ class CarrucelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function carrucel()
+    {
+        $carrucel = Carrucel::all();
+
+        if (auth()->check()) {
+            $usuario = auth()->user();
+            return view('welcome', compact('carrucel', 'usuario'));
+        }
+
+        return view('welcome', compact('carrucel'));
+    }
 
 
     public function admincarrucel(Request $request)
@@ -30,11 +41,7 @@ class CarrucelController extends Controller
     }
 
 
-    public function carrucel()
-    {
-        $carrucel = Carrucel::all();
-        return view('welcome', compact('carrucel'));
-    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -120,7 +127,7 @@ class CarrucelController extends Controller
         $idimagen->nombre = $request->input('nombre');
         $idimagen->save();
 
-        return redirect()->route('carruceladmin');
+        return redirect()->route('carruseladmin');
     }
 
     /**
@@ -148,6 +155,28 @@ class CarrucelController extends Controller
         // Eliminar el producto
         $carrucel->delete();
 
-        return redirect()->route('carruceladmin');
+        return redirect()->route('carruseladmin');
+    }
+
+
+    public function eliminarVarios(Request $request)
+    {
+        $idimagen = $request->input('eliminar', []);
+
+        if (empty($idimagen)) {
+            return back()->with('error', 'No se han seleccionado imágenes para eliminar.');
+        }
+
+        $imagenes = Carrucel::whereIn('idimagen', $idimagen)->get();
+
+        foreach ($imagenes as $imagen) {
+            $ruta_imagen = public_path('imgcarrucel') . '/' . $imagen->imagen;
+            if (file_exists($ruta_imagen)) {
+                unlink($ruta_imagen);
+            }
+            $imagen->delete();
+        }
+
+        return redirect()->route('carruseladmin');
     }
 }

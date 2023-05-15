@@ -29,22 +29,42 @@ class LoginController extends Controller
         return view('sesiones.iniciarsesion');
     }
 
+    // public function login(Request $request)
+    // {
+    //     $credentials = $request->only('email', 'password');
+
+    //     if (Auth::guard('admin')->attempt($credentials)) {
+    //         return redirect()->intended('/dashboard');
+    //     }
+
+    //     if (Auth::guard('web')->attempt($credentials)) {
+    //         return redirect()->intended('/');
+    //     }
+
+    //     return redirect()->back()->withErrors([
+    //         'email' => 'Credenciales incorrectas.',
+    //     ]);
+    // }
+
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
-        if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->intended('/dashboard');
-        }
-
-        if (Auth::guard('web')->attempt($credentials)) {
-            return redirect()->intended('/');
-        }
-
-        return redirect()->back()->withErrors([
-            'email' => 'Credenciales incorrectas.',
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
+
+        if (Auth::attempt($credentials)) {
+            // Authentication passed...
+            $request->session()->regenerate();
+            return redirect()->intended('/dashboard');
+        } else {
+            return redirect()->back()->withErrors(['email' =>'Las credenciales no coinciden con nuestros registros']);
+        }
+        
     }
+
+
 
     public function logout(Request $request)
     {

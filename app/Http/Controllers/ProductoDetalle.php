@@ -20,13 +20,18 @@ class ProductoDetalle extends Controller
      */
     public function detalles($idproducto)
     {
-        $producto = DB::table('tbl_productos')->where('idproducto', $idproducto)->first();
+        $detalles = Producto::find($idproducto);
 
-        return view('modulos.detalles', compact('producto', 'idproducto'));
+        $producto = DB::table('tbl_productos')
+            ->join('tbl_categoria', 'tbl_productos.categoria', '=', 'tbl_categoria.idcategoria')
+            ->join('tbl_marca', 'tbl_productos.marca', '=', 'tbl_marca.idmarca')
+            ->where('idproducto', $idproducto)
+            ->first();
+        return view('modulos.detalles', compact('producto', 'idproducto','detalles'));
     }
 
 
-    
+
     /**
      * Show the form for creating a new resource.
      *

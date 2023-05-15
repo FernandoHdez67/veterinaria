@@ -107,7 +107,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => true,
+        'enabled' => false,
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'AdminLTE Preloader Image',
@@ -289,9 +289,10 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Menu-Configuration
     |
     */
-
+    
     'menu' => [
         // Navbar items:
+
         [
             'type'         => 'navbar-search',
             'text'         => 'Buscar',
@@ -329,6 +330,16 @@ return [
             'icon' => 'fas fa-fw fa-dog'
         ],
         [
+            'text' => 'Categorias',
+            'route'  => 'categorias',
+            'icon' => 'fas fa-fw fa-bone'
+        ],
+        [
+            'text' => 'Marcas',
+            'route'  => 'marcas',
+            'icon' => 'fas fa-fw fa-soap'
+        ],
+        [
             'text' => 'Servicios',
             'route'  => 'services',
             'icon' => 'fas fa-fw fa-file'
@@ -339,8 +350,8 @@ return [
             'icon' => 'fas fa-fw fa-user'
         ],
         [
-            'text' => 'Carrucel',
-            'route'  => 'carruceladmin',
+            'text' => 'Carrusel',
+            'route'  => 'carruseladmin',
             'icon' => 'fas fa-fw fa-image'
         ],
         [

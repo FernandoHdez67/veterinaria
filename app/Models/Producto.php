@@ -12,6 +12,7 @@ class Producto extends Model
     protected $table="tbl_productos";
     protected $primaryKey="idproducto";
     protected $fillable = [
-        'nombre','precio', 'cantidad', 'descripcion', 'imagen'
+        'nombre','precio','categoria','marca', 'cantidad', 'descripcion', 'imagen'
     ];
+
 }

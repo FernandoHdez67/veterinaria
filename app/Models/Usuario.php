@@ -11,6 +11,15 @@ class Usuario extends Model
 
     protected $table = 'tbl_usuarios';
     protected $primaryKey = 'idusuario';
+    protected $fillable = [
+        'nombre', 
+        'apaterno', 
+        'amaterno', 
+        'telefono', 
+        'email', 
+        'direccion', 
+        'nombre_usuario', 
+        'password'];
 
     public function verificarCredenciales($email, $password)
     {

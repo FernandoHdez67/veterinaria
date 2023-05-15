@@ -13,6 +13,8 @@ class Detalles extends Model
         'nombre',
         'precio', 
         'cantidad', 
+        'categoria',
+        'marca',
         'descripcion', 
         'imagen'
     ];

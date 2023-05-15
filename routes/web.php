@@ -14,6 +14,9 @@ use App\Http\Controllers\UsuariosContoller;
 use App\Models\Usuarios;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\RespaldoController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 
 /*
@@ -29,7 +32,7 @@ use App\Http\Controllers\RespaldoController;
 
 Route::get('/', [App\Http\Controllers\CarrucelController::class, 'carrucel'])->name('inicio');
 
-Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
+Route::post('/logoute', [App\Http\Controllers\AuthController::class, 'logout'])->name('logoute');
 
 
 
@@ -55,9 +58,9 @@ Route::get('/registro-usuario', [App\Http\Controllers\UsuariosContoller::class, 
 
 
 
-Route::get('/iniciar',[App\Http\Controllers\AuthController::class, 'showLoginForm'])->name('iniciar');
+Route::get('/iniciar', [App\Http\Controllers\AuthController::class, 'showLoginForm'])->name('iniciar');
 
-Route::post('/iniciar',[App\Http\Controllers\AuthController::class, 'login'])->name('iniciar.sesion');
+Route::post('/iniciar', [App\Http\Controllers\AuthController::class, 'login'])->name('iniciar.sesion');
 
 
 Route::post('/registrar-usuario', [App\Http\Controllers\UsuariosContoller::class, 'store'])->name('registrar.usuario');
@@ -65,9 +68,8 @@ Route::post('/registrar-usuario', [App\Http\Controllers\UsuariosContoller::class
 Route::view('/carrito', 'modulos.carrito')->name('carrito');
 
 // Ruta para cargar el formulario de nueva cita
-Route::get('/citas', function () {
-    return view('modulos.citas');
-})->name('citas');
+Route::get('/citas', [App\Http\Controllers\CitasController::class, 'horario'])->name('citas');
+
 
 // Ruta para procesar los datos del formulario y almacenar la nueva cita
 Route::post('/citas', [App\Http\Controllers\CitasController::class, 'store'])->name('registro.citas');
@@ -75,14 +77,29 @@ Route::post('/citas', [App\Http\Controllers\CitasController::class, 'store'])->n
 
 
 
-Route::get('/nuevo-producto', function () {
-    return view('admin.insertar_producto');
-})->name('nuevo-producto');
+
+Route::get('/marcas', [App\Http\Controllers\MarcaController::class, 'marcas'])
+    ->middleware('auth', 'verified')
+    ->name('marcas');
+
+Route::post('/marcas', [App\Http\Controllers\MarcaController::class, 'store'])->name('insertar.marca');
+Route::put('/marcas/{idmarca}', [App\Http\Controllers\MarcaController::class, 'update'])->name('marca.update');
+Route::get('/marcas/{idmarca}/edit', [App\Http\Controllers\MarcaController::class, 'edit'])->name('marca.edit');
+Route::delete('/marcas/{idmarca}', [App\Http\Controllers\MarcaController::class, 'destroy'])->name('destroy.marca');
+
+Route::get('/categorias', [App\Http\Controllers\CategoriaController::class, 'categorias'])
+    ->middleware('auth', 'verified')
+    ->name('categorias');
+
+Route::post('/categorias', [App\Http\Controllers\CategoriaController::class, 'store'])->name('insertar.categoria');
+Route::put('/categorias/{idcategoria}', [App\Http\Controllers\CategoriaController::class, 'update'])->name('categoria.update');
+Route::get('/categorias/{idcategoria}/edit', [App\Http\Controllers\CategoriaController::class, 'edit'])->name('categoria.edit');
+Route::delete('/categorias/{idcategoria}', [App\Http\Controllers\CategoriaController::class, 'destroy'])->name('destroy.categoria');
+
 
 
 
 // Ruta para procesar los datos del formulario y almacenar el nuevo producto
-Route::post('/insertar-producto', [App\Http\Controllers\ProductoControllerAdmin::class, 'store'])->name('insertar.producto');
 
 Route::get('/nuevo-servicio', function () {
     return view('admin.insertar_servicio');
@@ -93,16 +110,14 @@ Route::post('/insertar-servicio', [App\Http\Controllers\ServiciosController::cla
 
 
 
-// Route::get('/contacto', function () {
-//     return view('modulos.comentarios');
-// })->name('contacto');
-
 Route::post('/contacto', [App\Http\Controllers\ContactoController::class, 'enviarCorreo'])->name('enviar');
 //TERMINA RUTAS SOLO PARA RETORNAR VISTAR DE LOS MODULOS
 
 //INICIA RUTAS SOLO PARA RETORNAR VISTAR DE LOS MODULOS METODO GET
 Route::get('/productos', [App\Http\Controllers\ProductoController::class, 'productos'])->name('productos');
 Route::get('/producto', [App\Http\Controllers\ProductoController::class, 'buscar'])->name('productos.buscar');
+
+Route::get('/product', [App\Http\Controllers\ProductoController::class, 'buscardos'])->name('prod.buscar');
 
 
 Route::get('/servicios', [App\Http\Controllers\ServiciosController::class, 'servicios'])->name('servicios');
@@ -118,15 +133,13 @@ Route::get('/dashboard', function () {
 
 
 Route::get('/editarperfil', [App\Http\Controllers\PerfilController::class, 'perfil'])
-    ->middleware('auth','verified')
+    ->middleware('auth', 'verified')
     ->name('perfil');
 
-
-
-
 Route::get('/configuracion', [App\Http\Controllers\ConfiguracionController::class, 'adminsomos'])
-    ->middleware('auth','verified')
+    ->middleware('auth', 'verified')
     ->name('configuracion');
+
 
 Route::put('/configuracion/{idconfiguracion}', [App\Http\Controllers\ConfiguracionController::class, 'update'])->name('somos.update');
 Route::get('/configuracion/{idconfiguracion}/edit', [App\Http\Controllers\ConfiguracionController::class, 'edit'])->name('somos.edit');
@@ -136,15 +149,21 @@ Route::get('/somos', [App\Http\Controllers\ConfiguracionController::class, 'somo
 
 
 Route::get('/products', [App\Http\Controllers\ProductoControllerAdmin::class, 'productos'])
-    ->middleware('auth','verified')
+    ->middleware('auth', 'verified')
     ->name('products');
 
+Route::delete('/products', [App\Http\Controllers\ProductoControllerAdmin::class, 'eliminarVarios'])->name('eliminar-varios.productos');
+
 Route::get('/citass', [App\Http\Controllers\CitasController::class, 'citas'])
-    ->middleware('auth','verified')
+    ->middleware('auth', 'verified')
     ->name('citass');
 
+Route::delete('/citass/{id}', [App\Http\Controllers\CitasController::class, 'destroy'])->name('destroy.cita');
+
+
+
 Route::get('/services', [App\Http\Controllers\ServiciosController::class, 'adminservicios'])
-    ->middleware('auth','verified')
+    ->middleware('auth', 'verified')
     ->name('services');
 
 Route::put('/services/{idservicio}', [App\Http\Controllers\ServiciosController::class, 'update'])->name('servicios.update');
@@ -154,14 +173,26 @@ Route::get('/services/{idservicio}/edit', [App\Http\Controllers\ServiciosControl
 Route::delete('/services/{idservicio}', [App\Http\Controllers\ServiciosController::class, 'destroy'])->name('destroy.servicios');
 
 Route::get('/users', [App\Http\Controllers\UsuariosControllerAdmin::class, 'usuarios'])
-    ->middleware('auth','verified')
+    ->middleware('auth', 'verified')
     ->name('users');
 
-Route::delete('/users/{idproducto}', [App\Http\Controllers\ProductoControllerAdmin::class, 'destroy'])->name('destroy.producto');
 
+Route::delete('/products/{idproducto}', [App\Http\Controllers\ProductoControllerAdmin::class, 'destroy'])->name('destroy.producto');
+Route::get('/nuevo-producto', [App\Http\Controllers\ProductoControllerAdmin::class, 'marcacategoria'])->name('nuevo-producto');
+Route::post('/products', [App\Http\Controllers\ProductoControllerAdmin::class, 'store'])->name('insertar.producto');
 Route::put('/products/{idproducto}', [App\Http\Controllers\ProductoControllerAdmin::class, 'update'])->name('productos.update');
-
 Route::get('/products/{idproducto}/edit', [App\Http\Controllers\ProductoControllerAdmin::class, 'edit'])->name('productos.edit');
+
+
+use App\Http\Controllers\RecuperarContrasenaController;
+
+Route::get('/recuperarcontrasena', [RecuperarContrasenaController::class, 'recuperar'])->name('recuperar.contrasena');
+
+Route::post('/recuperarcontrasena', [RecuperarContrasenaController::class, 'enviarLink'])->name('recuperar-contrasena.enviarLink');
+Route::get('/recuperarcontrasena/nueva-contrasena/{token}', [RecuperarContrasenaController::class, 'nuevaContrasena'])->name('recuperar-contrasena.nuevaContrasena');
+Route::post('/recuperarcontrasena/actualizar-contrasena', [RecuperarContrasenaController::class, 'actualizarContrasena'])->name('recuperar-contrasena.actualizarContrasena');
+
+
 
 Route::get('citas/obtener', [App\Http\Controllers\CitasController::class, 'obtener_citas'])->name('citas.obtener_citas');
 
@@ -170,14 +201,25 @@ Route::get('/agregar-imagen', function () {
     return view('admin.insertar_carrucel');
 })->name('agregar-imagen');
 
-Route::get('/carruceladmin', [App\Http\Controllers\CarrucelController::class, 'admincarrucel'])
-    ->middleware('auth','verified')
-    ->name('carruceladmin');
+Route::get('/politicas', function () {
+    return view('modulos.politicas');
+})->name('politicas');
+
+Route::get('/contacto', function () {
+    return view('modulos.contacto');
+})->name('contacto');
+
+
+
+Route::get('/carruseladmin', [App\Http\Controllers\CarrucelController::class, 'admincarrucel'])
+    ->middleware('auth', 'verified')
+    ->name('carruseladmin');
 
 Route::post('/agregar-imagen', [App\Http\Controllers\CarrucelController::class, 'store'])->name('nueva-imagen');
-Route::delete('/carruceladmin/{idimagen}', [App\Http\Controllers\CarrucelController::class, 'destroy'])->name('destroy.imagen');
-Route::put('/carruceladmin/{idimagen}', [App\Http\Controllers\CarrucelController::class, 'update'])->name('imagen.update');
-Route::get('/carruceladmin/{idimagen}/edit', [App\Http\Controllers\CarrucelController::class, 'edit'])->name('imagen.edit');
+Route::delete('/carruseladmin/{idimagen}', [App\Http\Controllers\CarrucelController::class, 'destroy'])->name('destroy.imagen');
+Route::delete('/carruseladmin', [App\Http\Controllers\CarrucelController::class, 'eliminarVarios'])->name('eliminar-varios.imagen');
+Route::put('/carruseladmin/{idimagen}', [App\Http\Controllers\CarrucelController::class, 'update'])->name('imagen.update');
+Route::get('/carruseladmin/{idimagen}/edit', [App\Http\Controllers\CarrucelController::class, 'edit'])->name('imagen.edit');
 
 // TERMINA RUTAS PARA LA ADMINISTRACION
 
@@ -198,18 +240,9 @@ require __DIR__ . '/auth.php';
 Route::get('/iniciarsesion', ['App\Http\Controllers\Auth\LoginController', 'showLoginForm'])->name('iniciarsesion');
 
 Route::post('/iniciarsesion', ['App\Http\Controllers\Auth\LoginController', 'login']);
-// Route::post('/logout', ['App\Http\Controllers\Auth\LoginController', 'logout'])->name('logout');
-
-
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 Route::resource('companies', CompanyController::class);
-
-// Route::resource('usuarios', RegistroController::class);
-// Route::get('/calendar',[App\Http\Controllers\CalendarController::class,'index'])->name('calendar');
-
-// Route::post('/registro', [CuentasController::class, 'store']);
 
 Route::get('/registerrr', 'RegisterController@showRegistrationForm');
 Route::post('/registerrr', 'RegisterController@register')->name('registerrr');
@@ -223,12 +256,7 @@ Route::post('/eliminar-bd', [RespaldoController::class, 'eliminarBD'])->name('el
 
 
 
-// routes/web.php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\VeterinarioController;
-use App\Http\Controllers\SecretariaController;
-use App\Http\Controllers\EnfermeroController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 
@@ -247,3 +275,26 @@ Route::get('reset-password/{token}', [ResetPasswordController::class, 'showReset
 
 // Restablecer la contraseña
 Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+
+//INICIAR SESION CON GOOGLE
+Route::get('/login-google', function () {
+    return Socialite::driver('google')->redirect();
+});
+
+
+Route::get('/google-callback', function () {
+    $user_google = Socialite::driver('google')->user();
+
+    $user = User::updateOrCreate([
+        'external_id' => $user_google->id,
+
+    ], [
+        'name' => $user_google->name,
+        'email' => $user_google->email,
+    ]);
+
+    Auth::login($user);
+
+    return redirect('/dashboard');
+});

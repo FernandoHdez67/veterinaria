@@ -31,7 +31,7 @@
                     </label>
                 </div>
             </div>
-            <a href="{{ route('password.request') }}">¿Olvidé mi contraseña?</a><br>
+            <a href="{{ route('recuperar.contrasena') }}">¿Olvidé mi contraseña?</a><br>
             <center><button type="submit" class="btn btn-rojopet">Iniciar Sesión</button></center> <br>
             <center>¿Aun no tienes cuenta? <a href="{{ route('registro') }}">Registrate</a></center>
     </div>

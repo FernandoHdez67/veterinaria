@@ -40,19 +40,20 @@
                         <td>{{ $citas->raza_mascota }}</td>
                         <td>{{ $citas->nombre_propietario }}</td>
                         <td>{{ $citas->telefono_propietario }}</td>
-                        <td>{{ $citas->edad_mascota.'años' }}</td>
+                        <td>{{ $citas->edad_mascota }}</td>
                         <td>{{ $citas->sexo_mascota }}</td>
                         <td>{{ $citas->fecha_cita }}</td>
                         <td>{{ $citas->hora_cita }}</td>
                         <td>{{ $citas->razon_cita }}</td>
                         <td>
-                            <form method="POST" action="#">
-                                @csrf
-                                <a href="#" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?')"><i class="fa-solid fa-trash-can"></i></button>
-                            </form>
-
+                            <div class="d-flex justify-content-between">
+                                {{-- <a href="{{ route('categoria.edit', $categoria->idcategoria) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a> --}}
+                                <form method="POST" action="{{ route('destroy.cita', $citas->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar esta Cita?')"><i class="fa-solid fa-trash-can"></i></button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     @endforeach

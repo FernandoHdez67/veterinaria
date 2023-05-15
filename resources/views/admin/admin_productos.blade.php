@@ -8,18 +8,30 @@
 
 @section('content')
 <div class="card">
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
     <div class="card-header">
         <a class="btn btn-info" href="{{ Route('nuevo-producto') }}"><i class="fa-solid fa-plus"></i> Agregar producto</a>
     </div>
     <div class="card-body">
-
         <div class="table-responsive">
+            {!! Form::open(['method' => 'DELETE', 'route' => ['eliminar-varios.productos']]) !!}
+            {!! Form::submit('Eliminar seleccionados', ['class' => 'btn btn-danger', 'onclick' => 'return confirm("¿Estás seguro de que quieres eliminar los elementos seleccionados?")']) !!} 
+            <br><br>
             <table class="table table-success table-striped">
                 <thead>
                     <tr>
+                        <th>
+                            {!! Form::checkbox('eliminar_todos', null, false, ['class' => 'seleccionar-todos']) !!}
+                        </th>
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Precio</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Marca</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Descripcion</th>
                         <th scope="col">Imagen</th>
@@ -27,32 +39,41 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($productos as $productos)
+                    @foreach ($productos as $producto)
                     <tr>
-
+                        <td>
+                            {!! Form::checkbox('eliminar[]', $producto->idproducto, false, ['class' => 'seleccionar']) !!}
+                        </td>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $productos->nombre }}</td>
-                        <td>{{ '$'.$productos->precio }}</td>
-                        <td>{{ $productos->cantidad }}</td>
-                        <td>{{ $productos->descripcion }}</td>
-                        <td><img src="{{ 'imgproductos/'.$productos->imagen}}" class="card-img-top" alt="" width="50px" height="50px"></td>
+                        <td>{{ $producto->nombre }}</td>
+                        <td>{{ '$'.$producto->precio }}</td>
+                        <td>{{ $producto->categoria }}</td>
+                        <td>{{ $producto->marca }}</td>
+                        <td>{{ $producto->cantidad }}</td>
+                        <td>{{ $producto->descripcion }}</td>
+                        <td><img src="{{ 'imgproductos/'.$producto->imagen}}" class="card-img-top" alt="" width="50px" height="50px"></td>
                         <td>
                             <div class="d-flex justify-content-between">
-                                <a href="{{ route('productos.edit', $productos->idproducto) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <form method="POST" action="{{ route('destroy.producto', $productos->idproducto) }}">
+                                <a href="{{ route('productos.edit', $producto->idproducto) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <form method="POST" action="{{ route('destroy.producto', $producto->idproducto) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?')"><i class="fa-solid fa-trash-can"></i></button>
                                 </form>
                             </div>
                         </td>
-                        
+    
                     </tr>
-                    @endforeach
+                    @endforeach 
                 </tbody>
             </table>
+            {!! Form::close() !!}
+        </div>
+        <div >
+            {{ $productos->links() }}
         </div>
     </div>
+    
 </div>
 @stop
 
@@ -74,6 +95,14 @@
         , 'Tarea exitosa!'
         , 'success'
     )
+
+</script>
+<script>
+    $(document).ready(function() {
+        $('.seleccionar-todos').click(function() {
+            $('.seleccionar').prop('checked', $(this).prop('checked'));
+        });
+    });
 
 </script>
 @stop

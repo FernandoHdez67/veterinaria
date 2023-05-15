@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('mystyle/mystyle.css') }}">
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -15,7 +20,7 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link rel="icon" href="{{ asset('img/icono.ico') }}">
     {{-- <script src="{{ asset('js/desactivarclickderecho.js') }}"></script> --}}
-    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <link rel="stylesheet" href="{{ asset('hover/hover-min.css') }}">
     <link rel="stylesheet" href="{{ asset('hover/hover.css') }}">
@@ -29,70 +34,68 @@
 
     </script>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#div-btn1').on('click', function() {
-                $("#central").load('principal');
-                return false;
-            });
-        });
+    <script src="{{ asset('js/ajax.js') }}"></script>
 
-    </script>
+    <style>
+        .active-link {
+            background-color: rgb(3, 151, 161);
+            color: #E15116;
+        }
+
+    </style>
 
     <title>@yield('title')</title>
 </head>
 
 <body>
+    <div class="contentido">
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary" onclick="changeNavColor()">
+            <div class="container-fluid">
+                <a id="div-btn1" href="<?= Route('inicio') ?>"><img id="div-btn1" src="{{ asset('img/logocirculo.png') }}" width="50px" height="50px" alt=""></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
+                        <li class="nav-item">
+                            <a id="div-btn1" href="#"></a>
+                            <a id="div-btn1" style="color: white" class="nav-link  <?php if(Route::current()->getName() == 'inicio') echo 'active-link'; ?> hvr-underline-from-left" aria-current="page" href="<?= Route('inicio') ?>"><b><i class="fa-solid fa-house"></i> Inicio</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="div-btn1" style="color: white" class="nav-link <?php if(Route::current()->getName() == 'somos') echo 'active-link'; ?> hvr-underline-from-left" aria-current="page" href="<?= Route('somos') ?>"><b><i class="fa-solid fa-circle-info"></i> Quienes somos</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="div-btn1" style="color: white" class="nav-link <?php if(Route::current()->getName() == 'productos') echo 'active-link'; ?> hvr-underline-from-left" aria-current="page" href="{{ Route('productos') }}"><b><i class="fa-solid fa-shield-dog"></i> Productos</b></a>
+                        </li>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary" onclick="changeNavColor()">
-        <div class="container-fluid">
-            <a href="<?= Route('inicio') ?>"><img src="{{ asset('img/logocirculo.png') }}" width="50px" height="50px" alt=""></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a id="div-btn1" href="#"></a>
-                        <a id="div-btn1" style="color: white" class="nav-link active hvr-underline-from-left" aria-current="page" href="<?= Route('inicio') ?>"><b><i class="fa-solid fa-house"></i> Inicio</b></a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="div-btn1" style="color: white" class="nav-link active hvr-underline-from-left" aria-current="page" href="<?= Route('somos') ?>"><b><i class="fa-solid fa-circle-info"></i> Quienes somos</b></a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="div-btn1" style="color: white" class="nav-link active hvr-underline-from-left" aria-current="page" href="{{ Route('productos') }}"><b><i class="fa-solid fa-shield-dog"></i> Productos</b></a>
-                    </li>
+                        <li class="nav-item">
+                            <a id="div-btn1" style="color: white" class="nav-link <?php if(Route::current()->getName() == 'servicios') echo 'active-link'; ?> hvr-underline-from-left" aria-current="page" href="<?= Route('servicios') ?>"><b><i class="fa-solid fa-syringe"></i> Servicios</b></a>
+                        </li>
 
-                    <li class="nav-item">
-                        <a id="div-btn1" style="color: white" class="nav-link active hvr-underline-from-left" aria-current="page" href="<?= Route('servicios') ?>"><b><i class="fa-solid fa-syringe"></i> Nuestros Servicios</b></a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a id="div-btn1" style="color: white" class="nav-link active hvr-underline-from-left" aria-current="page" href="<?= Route('citas') ?>"><b><i class="fa-regular fa-calendar-days"></i> Citas</b></a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="div-btn1" style="color: white" class="nav-link active hvr-underline-from-left" aria-current="page" href="<?= Route('ayuda') ?>"><b><i class="fa-solid fa-circle-question"></i> Ayuda</b></a>
-                    </li>
-                </ul>
-                <a id="div-btn1" style="text-decoration: none; color:white" href="{{ Route('carrito') }}">
-                    <img src="{{ asset('img/carrito2.png') }}" width="40px" height="30px" alt=""><b style="margin-right: 10px"> Carrito</b>
-                </a>
-                <form class="d-flex">                    
+                        <li class="nav-item">
+                            <a id="div-btn1" style="color: white" class="nav-link <?php if(Route::current()->getName() == 'citas') echo 'active-link'; ?> hvr-underline-from-left" aria-current="page" href="<?= Route('citas') ?>"><b><i class="fa-regular fa-calendar-days"></i> Citas</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="div-btn1" style="color: white" class="nav-link <?php if(Route::current()->getName() == 'ayuda') echo 'active-link'; ?> hvr-underline-from-left" aria-current="page" href="<?= Route('ayuda') ?>"><b><i class="fa-solid fa-circle-question"></i> Ayuda</b></a>
+                        </li>
+                    </ul>
+                    <a id="div-btn1" style="text-decoration: none; color:white" href="{{ Route('carrito') }}">
+                        <b style="margin-right: 10px"><i class="fa-solid fa-cart-plus fa-xl" style="color: #ffffff;"></i></i> Carrito</b>
+                    </a>
+                    {{-- <img src="{{ asset('img/carrito2.png') }}" width="40px" height="30px" alt=""> --}}
                     @if (session()->has('idusuario'))
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button class="btn btn-rojopet" type="submit"><b><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i> Cerrar sesión</b></button>
-                        </form>
+                    <form action="{{ route('logoute') }}" method="POST">
+                        @csrf
+                        <button class="btn btn-rojopet" type="submit"><b><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i> Cerrar sesión</b></button>
+                    </form>
                     @else
-                        <a id="div-btn1" class="btn btn-rojopet" href="{{ route('iniciar') }}"><b style="color: white"><i class="fa-solid fa-right-to-bracket"></i> Inciar Sesión</b></a>
+                    <a id="div-btn1" class="btn btn-rojopet" href="{{ route('iniciar') }}"><b style="color: white"><i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión</b></a>
                     @endif
-                </form>
-                
+                </div>
             </div>
-        </div>
-    </nav>
-
+        </nav>
+    </div>
 
 
     <div class="col-sm-12">
@@ -104,7 +107,7 @@
     <script>
         AOS.init();
 
-    </script>
+    </script>   
 
 </body>
 <footer class="bg-dark text-white pt-5">
@@ -114,9 +117,8 @@
                 <h3>Cachorro PET</h3>
                 <hr>
                 <ul class="list-unstyled text-secondary">
-                    <li><a class="text-decoration-none link-secondary" href="">Nosotros</a></li>
-                    <li><a class="text-decoration-none link-secondary" href="">Quienes somos</a></li>
-                    <li><a class="text-decoration-none link-secondary" href="">Politica de privacidad</a></li>
+                    <li><a class="text-decoration-none link-secondary" href="{{ Route('somos') }}">Quienes somos</a></li>
+                    <li><a class="text-decoration-none link-secondary" href="{{ route('politicas') }}">Términos y Condiciones</a></li>
                 </ul>
 
             </div>
@@ -127,16 +129,17 @@
                     <li><i class="fa-brands fa-twitter"></i> <a class="text-decoration-none link-secondary" href="">Twitter</a></li>
                     <li><i class="fa-brands fa-square-facebook"></i> <a class="text-decoration-none link-secondary" href="https://web.facebook.com/CachorroPetClinicaVeterinaria" target="_blank">Facebook</a></li>
                     <li><i class="fa-brands fa-instagram"></i> <a class="text-decoration-none link-secondary" href="">Instagram</a></li>
+                    <li><i class="fa-solid fa-envelope"></i> <a class="text-decoration-none link-secondary" href="{{ route('contacto') }}">Contacto</a></li>
 
             </div>
             <div class="col-md-3">
                 <h3>Servicios</h3>
                 <hr>
                 <ul class="list-unstyled text-secondary">
-                    <li><a class="text-decoration-none link-secondary" href="">Esterica canina</a></li>
-                    <li><a class="text-decoration-none link-secondary" href="">Ultrasonido</a></li>
-                    <li><a class="text-decoration-none link-secondary" href="">Cirugias</a></li>
-                    <li><a class="text-decoration-none link-secondary" href="">Otros</a></li>
+                    <li><a class="text-decoration-none link-secondary" href="{{ route('servicios') }}">Esterica canina</a></li>
+                    <li><a class="text-decoration-none link-secondary" href="{{ route('servicios') }}">Ultrasonido</a></li>
+                    <li><a class="text-decoration-none link-secondary" href="{{ route('servicios') }}">Cirugias</a></li>
+                    <li><a class="text-decoration-none link-secondary" href="{{ route('servicios') }}">Otros</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
@@ -151,8 +154,9 @@
                         México</li>
                     </li>
                 </ul>
-
             </div>
+            <hr>
+            <center><p class="text-decoration-none link-secondary">&copy; <?php echo date("Y"); ?> Todos los derechos reservados</p></center>
         </div>
     </div>
 </footer>

@@ -2,6 +2,8 @@
 
 // Note: Laravel will automatically resolve `Breadcrumbs::` without
 // this import. This is nice for IDE syntax and refactoring.
+
+use App\Models\Categoria;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 
 // This import is also not required, and you could replace `BreadcrumbTrail $trail`
@@ -43,6 +45,27 @@ Breadcrumbs::for('ayuda', function (BreadcrumbTrail $trail) {
     $trail->parent('inicio');
     $trail->push('Ayuda', route('ayuda'));
 });
+
+// Inicio > Citas
+Breadcrumbs::for('contacto', function (BreadcrumbTrail $trail) {
+    $trail->parent('inicio');
+    $trail->push('Contacto', route('contacto'));
+});
+
+// Inicio > Citas
+Breadcrumbs::for('politicas', function (BreadcrumbTrail $trail) {
+    $trail->parent('inicio');
+    $trail->push('Terminos y Condiciones', route('politicas'));
+});
+
+
+
+//Registro de las migas de pan
+Breadcrumbs::for('detalles', function ($trail, $detalles) {
+    $trail->parent('productos'); // Agrega la migaja de pan padre
+    $trail->push($detalles->nombre, route('detalles', $detalles)); // Agrega la migaja de pan actual
+});
+
 
 // Inicio > Productos > [Category]
 // Breadcrumbs::for('detalles', function (BreadcrumbTrail $trail, Detalles $detalles) {

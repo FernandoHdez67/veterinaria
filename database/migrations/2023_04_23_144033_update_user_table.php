@@ -12,15 +12,15 @@ return new class extends Migration
      * @return void
      */
     public function up()
-{
-    Schema::create('companies', function (Blueprint $table) {
-        $table->id();
-        $table->string('name');
-        $table->string('email');
-        $table->string('address');
-        $table->timestamps();
-    });
-}
+    {
+        Schema::table('users', function (Blueprint $table)
+        {
+            $table->string('password')->nullable()->change();
+            $table->string('avatar')->nullable();
+            $table->string('external_id')->nullable();
+            $table->string('external_auth')->nullable();
+        });
+    }
 
     /**
      * Reverse the migrations.
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        //
     }
 };

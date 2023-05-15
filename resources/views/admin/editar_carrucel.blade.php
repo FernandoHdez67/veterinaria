@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Carrucel')
+@section('title', 'Carrusel')
 
 @section('content_header')
-<h1>Editar Carrucel</h1>
+<h1>Editar Carrusel</h1>
 @stop
 
 @section('content')
@@ -24,13 +24,13 @@
                     </div>
                     <div class="form-group">
                         <label for="imagen">Imagen: <b style="color: red">*</b></label>
-                        <input type="file" class="form-control" id="imagen" name="imagen">
-                        {{ $carrucel->imagen }}
-                        <img src="{{ asset('imgcarrucel/' . $carrucel->imagen) }}" alt="{{ $carrucel->nombre }}" height="100px" width="100px" class="img-thumbnail">
+                        <input type="file" class="form-control" id="imagen" name="imagen" accept="image/jpeg, image/png"> <br>
+            
+                        <img src="{{ asset('imgcarrucel/' . $carrucel->imagen) }}" alt="" height="100px" width="100px" class="img-thumbnail">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Actualizar</button>
-                    <a href="{{ route('carruceladmin') }}" class="btn btn-secondary">Cancelar</a>
+                    <a href="{{ route('carruseladmin') }}" class="btn btn-secondary">Cancelar</a>
 
                 </form>
             </div>

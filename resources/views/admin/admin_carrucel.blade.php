@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Carrucel')
+@section('title', 'Carrusel')
 
 @section('content_header')
-<h1>Carrucel</h1>
+<h1>Carrusel</h1>
 @stop
 
 @section('content')
@@ -14,9 +14,15 @@
     <div class="card-body">
 
         <div class="table-responsive">
+            {!! Form::open(['method' => 'DELETE', 'route' => ['eliminar-varios.imagen']]) !!}
+            {!! Form::submit('Eliminar seleccionados', ['class' => 'btn btn-danger', 'onclick' => 'return confirm("¿Estás seguro de que quieres eliminar los elementos seleccionados?")']) !!} 
+            <br><br>
             <table class="table table-success table-striped">
                 <thead>
                     <tr>
+                        <th>
+                            {!! Form::checkbox('eliminar_todos', null, false, ['class' => 'seleccionar-todos']) !!}
+                        </th>
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Imagen</th>
@@ -26,9 +32,11 @@
                 <tbody>
                     @foreach ($carrucel as $carrucel)
                     <tr>
-
+                        <td>
+                            {!! Form::checkbox('eliminar[]', $carrucel->idimagen, false, ['class' => 'seleccionar']) !!}
+                        </td>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <th scope="row">{{ $carrucel->nombre }}</th>
+                        <td>{{ $carrucel->nombre }}</td>
                         <td><img src="{{ 'imgcarrucel/'.$carrucel->imagen}}" class="card-img-top" alt="" width="50px" height="100px"></td>
                         <td>
                             <form method="POST" action="{{ route('destroy.imagen', $carrucel->idimagen) }}">
@@ -43,6 +51,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {!! Form::close() !!} <br>
         </div>
     </div>
 </div>
@@ -66,6 +75,14 @@
         , 'Tarea exitosa!'
         , 'success'
     )
+
+</script>
+<script>
+    $(document).ready(function() {
+        $('.seleccionar-todos').click(function() {
+            $('.seleccionar').prop('checked', $(this).prop('checked'));
+        });
+    });
 
 </script>
 @stop

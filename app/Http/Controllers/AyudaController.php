@@ -61,7 +61,7 @@ class AyudaController extends Controller
             'pregunta.required' => 'La pregunta es obligatoria.',
             'respuesta.required' => 'La respuesta es obligatoria.',
         ];
-    
+
         $request->validate([
             'pregunta' => 'required|string',
             'respuesta' => 'required|string',
@@ -108,24 +108,24 @@ class AyudaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Ayuda $idpregunta)
-{
-    $messages = [
-        'pregunta.required' => 'La pregunta es obligatoria.',
-        'respuesta.required' => 'La respuesta es obligatoria.',
-    ];
+    {
+        $messages = [
+            'pregunta.required' => 'La pregunta es obligatoria.',
+            'respuesta.required' => 'La respuesta es obligatoria.',
+        ];
 
-    $request->validate([
-        'pregunta' => 'required|string',
-        'respuesta' => 'required|string',
-    ], $messages);
+        $request->validate([
+            'pregunta' => 'required|string',
+            'respuesta' => 'required|string',
+        ], $messages);
 
-    // Actualizamos el resto de los campos
-    $idpregunta->pregunta = $request->input('pregunta');
-    $idpregunta->respuesta = $request->input('respuesta');
-    $idpregunta->save();
+        // Actualizamos el resto de los campos
+        $idpregunta->pregunta = $request->input('pregunta');
+        $idpregunta->respuesta = $request->input('respuesta');
+        $idpregunta->save();
 
-    return redirect()->route('ayudaa');
-}
+        return redirect()->route('ayudaa');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -147,8 +147,5 @@ class AyudaController extends Controller
         $ayuda->delete();
 
         return redirect()->route('ayudaa');
-
-
-
     }
 }

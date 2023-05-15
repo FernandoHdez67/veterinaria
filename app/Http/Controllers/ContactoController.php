@@ -24,14 +24,14 @@ class ContactoController extends Controller
 
         try {
             Mail::send('welcome', $datos, function ($message) {
-                $message->from('fernando02.hdez@gmail.com', 'Fernando Hernandez');
-                $message->to('fernando02.hdez@gmail.com')->subject('Nuevo mensaje de contacto');
+                $message->from('MAIL_FROM_ADDRESS', 'MAIL_FROM_NAME');
+                $message->to('MAIL_FROM_ADDRESS')->subject('Nuevo mensaje de contacto');
             });
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['msg' => 'Ocurrió un error al enviar el correo. Por favor intenta de nuevo más tarde.']);
+            return redirect()->back()->withErrors(['success','Ocurrió un error al enviar el correo. Por favor intenta de nuevo más tarde.']);
         }
 
-        return view('welcome')->with('msg', 'Tu mensaje ha sido enviado.');
+        return redirect( route('contacto'))->with('success', 'Tu mensaje ha sido enviado.');
     }
 
     /**

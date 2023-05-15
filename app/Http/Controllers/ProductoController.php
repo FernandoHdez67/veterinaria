@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\fs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Marca;
+use App\Models\Categoria;
+use App\Models\Producto;
 
 class ProductoController extends Controller
 {
@@ -18,14 +21,22 @@ class ProductoController extends Controller
     {
         $texto = trim($request->get('texto'));
         $productos = DB::table('tbl_productos')
-            ->select('idproducto', 'nombre', 'precio', 'cantidad', 'descripcion', 'imagen')
+            ->select('idproducto', 'nombre', 'precio', 'tbl_categoria.categoria', 'tbl_marca.marca', 'cantidad', 'descripcion', 'imagen')
+            ->leftJoin('tbl_categoria', 'tbl_productos.categoria', '=', 'tbl_categoria.idcategoria')
+            ->leftJoin('tbl_marca', 'tbl_productos.marca', '=', 'tbl_marca.idmarca')
             ->where('nombre', 'LIKE', '%' . $texto . '%')
             ->orWhere('precio', 'LIKE', '%' . $texto . '%')
+            ->orWhere('tbl_categoria.categoria', 'LIKE', '%' . $texto . '%')
+            ->orWhere('tbl_marca.marca', 'LIKE', '%' . $texto . '%')
             ->orWhere('cantidad', 'LIKE', '%' . $texto . '%')
             ->orWhere('descripcion', 'LIKE', '%' . $texto . '%')
             ->orderBy('nombre', 'asc')
             ->paginate(30);
-        return view('modulos.productos', compact('productos', 'texto'));
+
+        $categoria = Categoria::all();
+        $marca = Marca::all();
+
+        return view('modulos.productos', compact('productos', 'categoria', 'marca', 'texto'));
     }
 
 
@@ -34,16 +45,45 @@ class ProductoController extends Controller
         $texto = trim($request->get('texto'));
         $ordenar = $request->get('ordenar');
 
+        $categoria = Categoria::all();
+        $marca = Marca::all();
+
         $productos = DB::table('tbl_productos')
-            ->select('idproducto', 'nombre', 'precio', 'cantidad', 'descripcion', 'imagen')
+            ->select('idproducto', 'nombre', 'precio', 'tbl_categoria.categoria', 'tbl_marca.marca', 'cantidad', 'descripcion', 'imagen')
+            ->leftJoin('tbl_categoria', 'tbl_productos.categoria', '=', 'tbl_categoria.idcategoria')
+            ->leftJoin('tbl_marca', 'tbl_productos.marca', '=', 'tbl_marca.idmarca')
             ->where('nombre', 'LIKE', '%' . $texto . '%')
             ->orWhere('precio', 'LIKE', '%' . $texto . '%')
+            ->orWhere('tbl_categoria.categoria', 'LIKE', '%' . $texto . '%')
+            ->orWhere('tbl_marca.marca', 'LIKE', '%' . $texto . '%')
             ->orWhere('cantidad', 'LIKE', '%' . $texto . '%')
             ->orWhere('descripcion', 'LIKE', '%' . $texto . '%')
             ->orderByRaw($ordenar === 'precio_asc' ? 'precio ASC' : 'precio DESC')
             ->paginate(30);
 
-        return view('modulos.productos', compact('productos', 'texto', 'ordenar'));
+        return view('modulos.productos', compact('productos', 'texto', 'ordenar','categoria','marca'));
+    }
+
+
+    public function buscardos(Request $request)
+    {
+        $categoria = $request->input('categoria');
+        $marca = $request->input('marca');
+
+        // Realizar la consulta a la base de datos para obtener los productos
+        // que correspondan a la categoría o marca seleccionada.
+        $productos = Producto::when($categoria, function ($query, $categoria) {
+            return $query->where('categoria', $categoria);
+        })
+            ->when($marca, function ($query, $marca) {
+                return $query->where('marca', $marca);
+            })
+            ->get();
+
+        $categoria = Categoria::all();
+        $marca = Marca::all();
+        // Retornar la vista con los resultados de la búsqueda.
+        return view('modulos.productos', compact('productos', 'categoria', 'marca'));
     }
 
 

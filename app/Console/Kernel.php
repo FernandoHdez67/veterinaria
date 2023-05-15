@@ -15,8 +15,20 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('backup:run --only-db')->dailyAt('21:00');
     }
+
+    //protected function schedule(Schedule $schedule)
+    // {
+    //     $schedule->command('backup:run')->dailyAt('21:00');
+    // }
+
+
+    // protected function schedule(Schedule $schedule)
+    // {
+    //     $schedule->command('backup:run')->daily();
+    // }
+
 
     /**
      * Register the commands for the application.
@@ -25,7 +37,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

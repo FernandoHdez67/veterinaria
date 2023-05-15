@@ -106,7 +106,6 @@ return [
         'database_dump_file_extension' => '',
 
         'destination' => [
-
             /*
              * The filename prefix used for the backup zip file.
              */
@@ -166,10 +165,10 @@ return [
         'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,
 
         'mail' => [
-            'to' => '20200767@uthh.edu.mx',
+            'to' => 'fernando02.hdez@gmail.com',
 
             'from' => [
-                'address' => env('MAIL_FROM_ADDRESS', '20200767@uthh.edu.mx'),
+                'address' => env('MAIL_FROM_ADDRESS', 'fernando02.hdez@gmail.com'),
                 'name' => env('MAIL_FROM_NAME', 'Example'),
             ],
         ],
