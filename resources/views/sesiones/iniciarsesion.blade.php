@@ -10,7 +10,7 @@
             @csrf
             <center><img src="{{ asset('img/user.png') }}" alt="" width="100px" height="100px"></center> <br>
             {{-- <i class="fa-brands fa-google fa-xl" style="color: #293f66;"></i> --}}
-            <center><a style="text-decoration: none" href="/login-google"><br>Inciar sesion con Google</a></center><br>
+            <center><a style="text-decoration: none" href="/login-google"><br>Inciar sesion con Google</a></center> <br>
             <div class="form-group">
                 <label for="correo">Correo</label>
                 <input type="email" name="email" id="email" value="{{ old('email') }}" class="form-control  @error('email') is-invalid @enderror" >
