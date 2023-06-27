@@ -276,7 +276,6 @@ Route::get('reset-password/{token}', [ResetPasswordController::class, 'showReset
 // Restablecer la contraseña
 Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
-
 //INICIAR SESION CON GOOGLE
 Route::get('/login-google', function () {
     return Socialite::driver('google')->redirect();
@@ -298,3 +297,4 @@ Route::get('/google-callback', function () {
 
     return redirect('/dashboard');
 });
+
