@@ -1,0 +1,29 @@
+{
+	"files": {
+		"assets/app-6246d51b.css": "assets/app-6246d51b.css",
+		"assets/ForgotPassword-755e02aa.js": "assets/ForgotPassword-755e02aa.js",
+		"assets/ResetPassword-e65b4e58.js": "assets/ResetPassword-e65b4e58.js",
+		"assets/AuthenticatedLayout-e52ea646.js": "assets/AuthenticatedLayout-e52ea646.js",
+		"assets/UpdatePasswordForm-6e1c8a86.js": "assets/UpdatePasswordForm-6e1c8a86.js",
+		"assets/PrimaryButton-98c0aa69.js": "assets/PrimaryButton-98c0aa69.js",
+		"assets/Welcome-14bf6e8d.js": "assets/Welcome-14bf6e8d.js",
+		"assets/ConfirmPassword-d35eda57.js": "assets/ConfirmPassword-d35eda57.js",
+		"assets/ApplicationLogo-0c62e0e0.js": "assets/ApplicationLogo-0c62e0e0.js",
+		"assets/TextInput-96d6c06f.js": "assets/TextInput-96d6c06f.js",
+		"assets/Edit-4ab7fd17.js": "assets/Edit-4ab7fd17.js",
+		"assets/UpdateProfileInformationForm-fba9ee00.js": "assets/UpdateProfileInformationForm-fba9ee00.js",
+		"assets/Register-fd1e8eeb.js": "assets/Register-fd1e8eeb.js",
+		"assets/Login-01b6a167.js": "assets/Login-01b6a167.js",
+		"assets/Dashboard-7c8911d3.js": "assets/Dashboard-7c8911d3.js",
+		"assets/GuestLayout-6fabbfc6.js": "assets/GuestLayout-6fabbfc6.js",
+		"assets/InputLabel-3366b71c.js": "assets/InputLabel-3366b71c.js",
+		"assets/DeleteUserForm-1c039553.js": "assets/DeleteUserForm-1c039553.js",
+		"assets/VerifyEmail-d8299c92.js": "assets/VerifyEmail-d8299c92.js",
+		"assets/transition-589f0d65.js": "assets/transition-589f0d65.js",
+		"assets/app-328dfbad.js": "assets/app-328dfbad.js",
+		"manifest.json": "manifest.json"
+	},
+	"entrypoints": [
+		"assets/app-328dfbad.js"
+	]
+}
