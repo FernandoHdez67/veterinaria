@@ -9,6 +9,8 @@ use App\Models\Citas;
 use App\Models\Horario;
 use DateTime;
 use DateInterval;
+use Illuminate\Validation\Rule;
+
 
 
 
@@ -88,8 +90,9 @@ class CitasController extends Controller
             'fecha_cita.required' => 'La fecha de la cita es obligatoria',
             'fecha_cita.date' => 'La fecha de la cita debe ser una fecha válida',
             'hora_cita.required' => 'La hora de la cita es obligatoria',
-            'hora_cita.regex' => 'La hora de la cita debe tener el formato HH:MM',
             'razon_cita.required' => 'La razón de la cita es obligatoria',
+            // Agregar el mensaje personalizado para la regla de unicidad en 'hora_cita'
+            'hora_cita.unique' => 'El horario seleccionado ya está ocupado. Por favor, elige otro horario.',
         ];
 
         $request->validate([
@@ -99,8 +102,22 @@ class CitasController extends Controller
             'telefono_propietario' => 'required|numeric|digits:10',
             'edad_mascota' => 'required|integer|min:0',
             'sexo_mascota' => 'required',
-            'fecha_cita' => ['required', 'date_format:Y-m-d', 'after:' . date('Y-m-d')],
-            'hora_cita' => 'required',
+            'fecha_cita' => [
+                'required', 'date_format:Y-m-d',
+                function ($attribute, $value, $fail) {
+                    if (strtotime($value) < strtotime(date('Y-m-d'))) {
+                        $fail('No puede agendar citas con fechas anteriores.');
+                    }
+                },
+            ],
+            'hora_cita' => [
+                'required',
+                // Verificar unicidad del horario para la fecha seleccionada
+                Rule::unique('tbl_citas')->where(function ($query) use ($request) {
+                    return $query->where('fecha_cita', $request->fecha_cita)
+                        ->where('hora_cita', $request->hora_cita);
+                }),
+            ],
             'razon_cita' => 'required|string|max:255',
         ], $messages);
 
