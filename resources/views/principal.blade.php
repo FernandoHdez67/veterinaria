@@ -119,6 +119,7 @@
                 <ul class="list-unstyled text-secondary">
                     <li><a class="text-decoration-none link-secondary" href="{{ Route('somos') }}">Quienes somos</a></li>
                     <li><a class="text-decoration-none link-secondary" href="{{ route('politicas') }}">Términos y Condiciones</a></li>
+                    <li><a class="text-decoration-none link-secondary" href="#">Aviso de privacidad</a></li>
                 </ul>
 
             </div>
