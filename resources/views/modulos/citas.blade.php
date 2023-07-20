@@ -18,27 +18,37 @@
             <div class="col-lg-6 mb-3">
                 <label for="nombre_mascota" class="form-label">Nombre de la mascota:</label>
                 <input type="text" class="form-control @error('nombre_mascota') is-invalid @enderror" value="{{ old('nombre_mascota') }}" id="nombre_mascota" name="nombre_mascota">
-                <div class="invalid-feedback" id="nombre_mascota-error"></div>
+                @error('nombre_mascota')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="col-lg-6 mb-3">
                 <label for="raza_mascota" class="form-label">Raza de la mascota:</label>
                 <input type="text" class="form-control @error('raza_mascota') is-invalid @enderror" value="{{ old('raza_mascota') }}" id="raza_mascota" name="raza_mascota">
-                <div class="invalid-feedback" id="raza_mascota-error"></div>
+                @error('raza_mascota')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="col-lg-6 mb-3">
                 <label for="nombre_propietario" class="form-label">Nombre del propietario:</label>
                 <input type="text" class="form-control @error('nombre_propietario') is-invalid @enderror" value="{{ old('nombre_propietario') }}" id="nombre_propietario" name="nombre_propietario">
-                <div class="invalid-feedback" id="nombre_propietario-error"></div>
+                @error('nombre_propietario')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="col-lg-6 mb-3">
                 <label for="telefono_propietario" class="form-label">Teléfono del propietario:</label>
                 <input type="text" class="form-control @error('telefono_propietario') is-invalid @enderror" value="{{ old('telefono_propietario') }}" id="telefono_propietario" name="telefono_propietario">
-                <div class="invalid-feedback" id="telefono_propietario-error"></div>
+                @error('nombre_propietario')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="col-lg-6 mb-3">
                 <label for="edad_mascota" class="form-label">Edad de la Mascota:</label>
                 <input type="text" class="form-control @error('edad_mascota') is-invalid @enderror" value="{{ old('edad_mascota') }}" id="edad_mascota" name="edad_mascota">
-                <div class="invalid-feedback" id="edad_mascota-error"></div>
+                @error('edad_mascota')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="col-lg-6 mb-3">
                 <label for="sexo_mascota" class="form-label">Sexo de la Mascota:</label>
@@ -47,13 +57,17 @@
                     <option value="Macho" {{ old('sexo_mascota') == 'Macho' ? 'selected' : '' }}>Macho</option>
                     <option value="Hembra" {{ old('sexo_mascota') == 'Hembra' ? 'selected' : '' }}>Hembra</option>
                 </select>
-                <div class="invalid-feedback" id="sexo_mascota-error"></div>
+                @error('sexo_mascota')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="col-lg-6 mb-3">
                 <label for="fecha_cita" class="form-label">Fecha de la cita:</label>
                 <input type="date" class="form-control @error('fecha_cita') is-invalid @enderror" value="{{ old('fecha_cita') }}" id="fecha_cita" name="fecha_cita">
-                <div class="invalid-feedback" id="fecha_cita-error"></div>
+                @error('fecha_cita')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="col-lg-6 mb-3">
                 <label for="hora_cita" class="form-label">Hora de la cita:</label>
@@ -63,12 +77,16 @@
                     <option value="{{ $horario_items->idhorario }}">{{ $horario_items->horario }}</option>
                     @endforeach
                 </select>
-                <div class="invalid-feedback" id="categoria-error"></div>
+                @error('hora_cita')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror 
             </div>
             <div class="col-12 mb-3">
                 <label for="razon_cita" class="form-label">Especifique el motivo de su cita:</label>
                 <textarea class="form-control @error('razon_cita') is-invalid @enderror" value="" id="razon_cita" name="razon_cita" rows="4">{{ old('razon_cita') }}</textarea>
-                <div class="invalid-feedback" id="razon_cita-error"></div>
+                @error('razon_cita')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
         </div>
 
