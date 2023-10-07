@@ -46,7 +46,7 @@ class ProductoControllerAdmin extends Controller
     {
         $texto = trim($request->get('texto'));
         $productos = DB::table('tbl_productos')
-            ->select('idproducto', 'nombre', 'precio', 'tbl_categoria.categoria', 'tbl_marca.marca', 'cantidad', 'descripcion', 'imagen')
+            ->select('idproducto', 'nombre', 'precio', 'tbl_categoria.categoria as categoria', 'tbl_marca.marca as marca', 'cantidad', 'descripcion', 'imagen')
             ->leftJoin('tbl_categoria', 'tbl_productos.categoria', '=', 'tbl_categoria.idcategoria')
             ->leftJoin('tbl_marca', 'tbl_productos.marca', '=', 'tbl_marca.idmarca')
             ->where('nombre', 'LIKE', '%' . $texto . '%')

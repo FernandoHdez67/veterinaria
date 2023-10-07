@@ -10,6 +10,7 @@ use App\Models\Horario;
 use DateTime;
 use DateInterval;
 use Illuminate\Validation\Rule;
+use App\Models\Servicio;
 
 
 
@@ -25,8 +26,9 @@ class CitasController extends Controller
 
     public function horario(Request $request)
     {
+        $servicios = Servicio::all(); // Obtén todos los registros de la tabla tbl_servicios
         $horario = Horario::all();
-        return view('modulos.citas', ['horario' => $horario]);
+        return view('modulos.citas', ['servicios' => $servicios, 'horario' => $horario]);
     }
 
 
@@ -34,7 +36,7 @@ class CitasController extends Controller
     {
         $texto = trim($request->get('texto'));
         $citas = DB::table('tbl_citas')
-            ->select('id', 'nombre_mascota', 'raza_mascota', 'nombre_propietario', 'telefono_propietario', 'edad_mascota', 'sexo_mascota', 'fecha_cita', 'tbl_citas.hora_cita', 'razon_cita')
+            ->select('id', 'nombre_mascota', 'raza_mascota', 'nombre_propietario', 'telefono_propietario', 'edad_mascota', 'sexo_mascota', 'fecha_cita', 'tbl_horarios.horario as hora_cita', 'razon_cita')
             ->leftJoin('tbl_horarios', 'tbl_citas.hora_cita', '=', 'tbl_horarios.idhorario')
             ->where('nombre_mascota', 'LIKE', '%' . $texto . '%')
             ->orWhere('raza_mascota', 'LIKE', '%' . $texto . '%')
@@ -43,15 +45,14 @@ class CitasController extends Controller
             ->orWhere('edad_mascota', 'LIKE', '%' . $texto . '%')
             ->orWhere('sexo_mascota', 'LIKE', '%' . $texto . '%')
             ->orWhere('fecha_cita', 'LIKE', '%' . $texto . '%')
-            ->orWhere('tbl_citas.hora_cita', 'LIKE', '%' . $texto . '%')
+            ->orWhere('tbl_horarios.horario', 'LIKE', '%' . $texto . '%') // Aquí también debes cambiar a 'tbl_horarios.horario'
             ->orWhere('razon_cita', 'LIKE', '%' . $texto . '%')
             ->orderBy('nombre_mascota', 'asc')
             ->paginate(30);
 
-
-
         return view('admin.admin_citas', compact('citas', 'texto'));
     }
+
 
     /**
      * Show the form for creating a new resource.

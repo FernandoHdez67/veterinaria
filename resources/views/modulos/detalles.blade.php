@@ -47,7 +47,6 @@
                         <div class="col-md-6">
                             <a id="div-btn1" href="#" class="btn btn-success"><i class="fa-solid fa-plus"></i> Agregar al carrito</a><br><br>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -58,7 +57,7 @@
 <style>
     .input-group input[type="number"] {
         text-align: center;
-        
+
     }
 
     .input-group .btn {
