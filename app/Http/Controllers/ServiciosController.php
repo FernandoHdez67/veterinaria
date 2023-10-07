@@ -7,6 +7,7 @@ use App\Models\sf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Servicio;
 
 class ServiciosController extends Controller
 {
@@ -15,6 +16,12 @@ class ServiciosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function servicio(Request $request)
+    {
+        $servicios = Servicio::all();
+        return view('modulos.citas', ['tipo' => $servicios]);
+    }
+
     public function servicios(Request $request)
     {
         $texto = trim($request->get('texto'));

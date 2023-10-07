@@ -29,6 +29,13 @@
                 <button type="submit" class="btn btn-rojopet hvr-grow">Enviar comentario</button> <br><br>
             </form>
         </div>
+        <center>
+            <div id="map"></div>
+        </center>
+        <script src="{{ asset('js/GoogleMaps/googlemaps.js') }}"></script>
+        <link rel="stylesheet" href="{{ asset('mystyle/googlemaps.css') }}">
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs5yI1WmjnMQlJV7rnw-hCtTaiHFCb0K4&callback=iniciarMap()"></script>
+        
 </div>
 
 <br><br><br><br><br><br><br><br><br><br>

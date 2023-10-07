@@ -4,82 +4,60 @@ namespace App\Http\Controllers;
 
 use App\Models\sf;
 use Illuminate\Http\Request;
+use App\Models\Producto;
 
 class CarritoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        // Obtener los productos del carrito desde la sesión
+        $carrito = session()->get('carrito', []);
+
+        return view('modulos.carrito', compact('carrito'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function agregar($idproducto)
     {
-        //
+        // Obtener el producto de la base de datos por su ID
+        $producto = Producto::findOrFail($idproducto);
+
+        // Obtener el carrito actual desde la sesión
+        $carrito = session()->get('carrito', []);
+
+        // Agregar el producto al carrito
+        $carrito[$idproducto] = [
+            'idproducto' => $producto->idproducto,
+            'nombre' => $producto->nombre,
+            'cantidad' => 1, // Puedes ajustar la cantidad según tus necesidades
+            'total' => $producto->precio,
+        ];
+
+        // Guardar el carrito actualizado en la sesión
+        session()->put('carrito', $carrito);
+
+        return redirect()->route('carrito')->with('success', 'Producto agregado al carrito.');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function remover($idproducto)
     {
-        //
+        // Obtener el carrito actual desde la sesión
+        $carrito = session()->get('carrito', []);
+
+        // Eliminar el producto del carrito si existe
+        if (isset($carrito[$idproducto])) {
+            unset($carrito[$idproducto]);
+            // Actualizar el carrito en la sesión
+            session()->put('carrito', $carrito);
+        }
+
+        return redirect()->route('carrito.index')->with('success', 'Producto eliminado del carrito.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\sf  $sf
-     * @return \Illuminate\Http\Response
-     */
-    public function show(sf $sf)
+    public function limpiar()
     {
-        //
-    }
+        // Limpiar el carrito de compras eliminando todos los productos
+        session()->forget('carrito');
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\sf  $sf
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(sf $sf)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\sf  $sf
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, sf $sf)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\sf  $sf
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(sf $sf)
-    {
-        //
+        return redirect()->route('carrito.index')->with('success', 'Carrito limpiado.');
     }
 }

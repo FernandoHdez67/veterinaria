@@ -40,10 +40,10 @@
 
 </div> <br><br>
 
-<center>
+{{-- <center>
     <iframe src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d1860.6009328858565!2d-98.4089551018524!3d21.14436331628205!3m2!1i1024!2i768!4f13.1!2m1!1sclinica%20veterinaria%20cachorro%20pet%20huejutla!5e0!3m2!1ses!2smx!4v1678522752873!5m2!1ses!2smx" width="330" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-</center>
-< </div>
+</center> --}}
+
 
     {{-- <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="4de9b006-20ff-4662-a907-7da749fc88e0" data-blockingmode="auto" type="text/javascript"></script>
     <script id="CookieDeclaration" src="https://consent.cookiebot.com/4de9b006-20ff-4662-a907-7da749fc88e0/cd.js" type="text/javascript" async></script> --}}

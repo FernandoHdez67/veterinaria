@@ -65,7 +65,6 @@ Route::post('/iniciar', [App\Http\Controllers\AuthController::class, 'login'])->
 
 Route::post('/registrar-usuario', [App\Http\Controllers\UsuariosContoller::class, 'store'])->name('registrar.usuario');
 
-Route::view('/carrito', 'modulos.carrito')->name('carrito');
 
 // Ruta para cargar el formulario de nueva cita
 Route::get('/citas', [App\Http\Controllers\CitasController::class, 'horario'])->name('citas');
@@ -298,3 +297,38 @@ Route::get('/google-callback', function () {
     return redirect('/dashboard');
 });
 
+
+
+//CARRITO DE COMPRAS
+
+Route::get('/carrito', [App\Http\Controllers\CarritoController::class,'index'])->name('carrito.index');
+Route::post('/carrito/agregar/{idproducto}', [App\Http\Controllers\CarritoController::class,'agregar'])->name('carrito.agregar');
+Route::post('/carrito/remover/{idproducto}', [App\Http\Controllers\CarritoController::class,'remover'])->name('carrito.remover');
+Route::post('/carrito/limpiar', [App\Http\Controllers\CarritoController::class,'limpiar'])->name('carrito.limpiar');
+
+
+//PREDICCIONES
+Route::get('/prediccion', function () {
+    return view('prediccion.prediction_form');
+});
+
+Route::post('/pred', [App\Http\Controllers\PredictionController::class,'getP rediction'])->name('prediccion');
+
+
+Route::get('/offline', function() {
+    return view('vendor.laravelpwa.offline');
+});
+
+// Rutas para los archivos CSS y JS
+Route::get('/css/app.css', function () {
+    return response()->file(public_path('css/app.css'));
+});
+
+Route::get('/js/app.js', function () {
+    return response()->file(public_path('js/app.js'));
+});
+
+// Rutas para las imágenes
+Route::get('/images/icons/icon-72x72.png', function () {
+    return response()->file(public_path('images/icons/icon-72x72.png'));
+});

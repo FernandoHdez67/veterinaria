@@ -81,6 +81,18 @@
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror 
             </div>
+            <div class="col-lg-6 mb-3">
+                <label for="servicio" class="form-label">Servicio Solicitado:</label>
+                <select class="form-select @error('servicio') is-invalid @enderror" aria-label="Default select example" id="servicio" name="servicio">
+                    <option selected>[Seleccionar servicio]</option>
+                    @foreach($servicios as $servicio_items)
+                    <option value="{{ $servicio_items->idservicio }}">{{ $servicio_items->tipo }}</option>
+                    @endforeach
+                </select>
+                @error('servicio')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror 
+            </div>
             <div class="col-12 mb-3">
                 <label for="razon_cita" class="form-label">Especifique el motivo de su cita:</label>
                 <textarea class="form-control @error('razon_cita') is-invalid @enderror" value="" id="razon_cita" name="razon_cita" rows="4">{{ old('razon_cita') }}</textarea>

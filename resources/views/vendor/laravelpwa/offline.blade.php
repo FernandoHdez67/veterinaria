@@ -3,14 +3,11 @@
 @section('title',"Carrito")
 
 @section ('contenido')
-{{ Breadcrumbs::render('ayuda') }}
-
 
 <div class="container">
     <center>
         <div>
-            <h2>El carrito de compras está vacio!!</h2>
-            <a class="btn btn-" href="{{ route('productos') }}">Ver productos</a>
+            <h2>No hay conexion a internet</h2>
         </div>
     </center>
 </div>

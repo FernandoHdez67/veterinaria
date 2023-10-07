@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Carrito extends Model
 {
-    use HasFactory;
+    public $timestamps = false;
+    protected $table="tbl_carrito";
+    protected $fillable = ['producto_id', 'nombre', 'cantidad', 'total'];
+    
+    
 }
