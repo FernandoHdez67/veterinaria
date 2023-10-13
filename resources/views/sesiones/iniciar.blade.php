@@ -11,7 +11,7 @@
             @csrf
             <center><img src="{{ asset('img/user.png') }}" alt="" width="100px" height="100px"></center><br>
             <select class="form-select" id="sesion" name="sesion">
-                <option value="">[Elija un tipo]</option>
+                <option value="tipo">[Elija un tipo]</option>
                 <option value="Usuario">Usuario</option>
                 <option value="Administrador">Administrador</option>
             </select>
@@ -64,15 +64,25 @@
         // Guardar el valor seleccionado en el almacenamiento local
         localStorage.setItem(selectId, selectedOption);
 
-        if (selectedOption === 'Administrador') {
-            // Redirige al formulario de administrador
-            window.location.href = "{{ route('iniciarsesion') }}";
-        } else if (selectedOption === 'Usuario') {
+        if (selectedOption === 'Usuario') {
             // Redirige al formulario de usuario
             window.location.href = "{{ route('iniciar') }}";
+        } else if (selectedOption === 'Administrador') {
+            // Redirige al formulario de administrador
+            window.location.href = "{{ route('iniciarsesion') }}";
         }
     });
 </script>
+<script>
+    function togglePassword() {
+        const passwordField = document.getElementById("contrasenia");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
+    }
 
+</script>
 
 @endsection

@@ -18,7 +18,8 @@
                                 <h3 class="card-title">{{$servicio->tipo}}</h3>
                             </center>
                             <p class="card-text">{{$servicio->descripcion}}</p> <br>
-                            <center><a id="div-btn1" href="<?= Route('citas') ?>" class="btn btn-rojopet">Agendar Cita</a></center>
+                            <a href="{{ route('citas', ['idservicio' => $servicio->idservicio]) }}" class="btn btn-rojopet">Agendar Cita</a>
+
                         </div>
                     </div>
                 </div>

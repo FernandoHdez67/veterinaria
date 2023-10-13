@@ -71,7 +71,7 @@
             </div>
             <div class="col-lg-6 mb-3">
                 <label for="hora_cita" class="form-label">Hora de la cita:</label>
-                <select class="form-select @error('hora_cita') is-invalid @enderror" aria-label="Default select example" id="hora_cita" name="hora_cita">
+                <select class="form-select @error('hora_cita') is-invalid @enderror" id="hora_cita" name="hora_cita">
                     <option selected>[Seleccionar Hora]</option>
                     @foreach($horario as $horario_items)
                     <option value="{{ $horario_items->idhorario }}">{{ $horario_items->horario }}</option>
@@ -82,22 +82,26 @@
                 @enderror 
             </div>
             <div class="col-lg-6 mb-3">
-                <label for="servicio" class="form-label">Servicio Solicitado:</label>
-                <select class="form-select @error('servicio') is-invalid @enderror" aria-label="Default select example" id="servicio" name="servicio">
+                <label for="razon_cita" class="form-label">Tipo de Servicio:</label>
+                <select class="form-select @error('razon_cita') is-invalid @enderror" aria-label="Default select example" id="razon_cita" name="razon_cita">
                     <option selected>[Seleccionar servicio]</option>
-                    @foreach($servicios as $servicio_items)
-                    <option value="{{ $servicio_items->idservicio }}">{{ $servicio_items->tipo }}</option>
+                    @foreach($servicios as $servicio_item)
+                        <option value="{{ $servicio_item->tipo }}" {{ $servicio && $servicio_item->idservicio == $servicio->idservicio ? 'selected' : '' }}>
+                            {{ $servicio_item->tipo }}
+                        </option>
                     @endforeach
+                    <option value="otro" {{ old('razon_cita') == 'otro' ? 'selected' : '' }}>Otro</option>
                 </select>
-                @error('servicio')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror 
-            </div>
-            <div class="col-12 mb-3">
-                <label for="razon_cita" class="form-label">Especifique el motivo de su cita:</label>
-                <textarea class="form-control @error('razon_cita') is-invalid @enderror" value="" id="razon_cita" name="razon_cita" rows="4">{{ old('razon_cita') }}</textarea>
                 @error('razon_cita')
-                <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            
+            <div id="motivoOtroDiv" class="col-12 mb-3" style="display: {{ old('servicio') == 'otro' ? 'block' : 'none' }}">
+                <label for="motivo_otro" class="form-label">Especifique el motivo de su cita:</label>
+                <textarea class="form-control @error('motivo_otro') is-invalid @enderror" id="motivo_otro" name="motivo_otro" rows="4">{{ old('motivo_otro') }}</textarea>
+                @error('motivo_otro')
+                    <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
         </div>
@@ -106,6 +110,28 @@
     </form>
 </div> <br><br>
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Ocultar o mostrar el campo de texto según la opción seleccionada
+        $('#razon_cita').change(function() {
+            var selectedOption = $(this).val();
+            if (selectedOption === 'otro') {
+                $('#motivoOtroDiv').show();
+            } else {
+                $('#motivoOtroDiv').hide();
+            }
+        });
+
+        // Cuando la página se carga, verificar el estado inicial del menú desplegable
+        var initialOption = $('#razon_cita').val();
+        if (initialOption === 'otro') {
+            $('#motivoOtroDiv').show();
+        } else {
+            $('#motivoOtroDiv').hide();
+        }
+    });
+</script>
 
 <script>
     // Obtenemos el formulario y agregamos un event listener para validar los campos antes de enviar

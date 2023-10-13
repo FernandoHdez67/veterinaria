@@ -36,7 +36,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary">Actualizar</button>
-                    <a href="{{ route('carruceladmin') }}" class="btn btn-secondary">Cancelar</a>
+                    <a href="#" class="btn btn-secondary">Cancelar</a>
 
                 </form>
             </div>

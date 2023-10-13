@@ -364,6 +364,11 @@ return [
             'route'  => 'configuracion',
             'icon' => 'fas fa-fw fa-cogs'
         ],
+        [
+            'text' => 'Editar perfil',
+            'route'  => 'profile.edit',
+            'icon' => 'fas fa-fw fa-user-pen'
+        ],
         
     ],
 

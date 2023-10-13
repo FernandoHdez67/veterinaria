@@ -38,7 +38,9 @@
 
         <!-- Calendario -->
 
-        <div id='calendar'></div>
+        <div id='calendar'>
+            
+        </div>
 
     </div>
 
@@ -52,12 +54,5 @@
 @stop
 
 @section('js')
-<script>
-    Swal.fire(
-        'Buen Trabajo!'
-        , 'Tarea exitosa!'
-        , 'success'
-    )
 
-</script>
 @stop

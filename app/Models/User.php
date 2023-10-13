@@ -60,6 +60,7 @@ class User extends Authenticatable
 
     public function adminlte_profile_url()
     {
-        return route('perfil');
+        return route('profile.edit');
     }
+    
 }

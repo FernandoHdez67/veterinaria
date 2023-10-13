@@ -135,6 +135,9 @@ Route::get('/editarperfil', [App\Http\Controllers\PerfilController::class, 'perf
     ->middleware('auth', 'verified')
     ->name('perfil');
 
+Route::put('/editarperfil/update', [App\Http\Controllers\PerfilController::class, 'update'])->name('perfiluser.update');
+Route::get('/editarperfil/edit', [App\Http\Controllers\PerfilController::class, 'edit'])->name('perfiluser.edit');
+
 Route::get('/configuracion', [App\Http\Controllers\ConfiguracionController::class, 'adminsomos'])
     ->middleware('auth', 'verified')
     ->name('configuracion');
@@ -193,7 +196,7 @@ Route::post('/recuperarcontrasena/actualizar-contrasena', [RecuperarContrasenaCo
 
 
 
-Route::get('citas/obtener', [App\Http\Controllers\CitasController::class, 'obtener_citas'])->name('citas.obtener_citas');
+Route::get('/eventos', [App\Http\Controllers\CitasController::class, 'obtener_citas'])->name('eventos');
 
 
 Route::get('/agregar-imagen', function () {

@@ -26,11 +26,17 @@ class CitasController extends Controller
 
     public function horario(Request $request)
     {
-        $servicios = Servicio::all(); // Obtén todos los registros de la tabla tbl_servicios
-        $horario = Horario::all();
-        return view('modulos.citas', ['servicios' => $servicios, 'horario' => $horario]);
-    }
+        $servicio_id = $request->input('idservicio');
+        $servicio = Servicio::find($servicio_id);
 
+        // Obtén otros datos necesarios, como los horarios
+        $horario = Horario::all();
+
+        // Obtén la lista completa de servicios para el select
+        $servicios = Servicio::all();
+
+        return view('modulos.citas', compact('servicio', 'horario', 'servicios'));
+    }
 
     public function citas(Request $request)
     {
@@ -90,10 +96,10 @@ class CitasController extends Controller
             'sexo_mascota.required' => 'El sexo de la mascota es obligatorio',
             'fecha_cita.required' => 'La fecha de la cita es obligatoria',
             'fecha_cita.date' => 'La fecha de la cita debe ser una fecha válida',
-            'hora_cita.required' => 'La hora de la cita es obligatoria',
             'razon_cita.required' => 'La razón de la cita es obligatoria',
             // Agregar el mensaje personalizado para la regla de unicidad en 'hora_cita'
             'hora_cita.unique' => 'El horario seleccionado ya está ocupado. Por favor, elige otro horario.',
+            'hora_cita.required' => 'La hora de la cita es obligatoria',
         ];
 
         $request->validate([
@@ -119,10 +125,10 @@ class CitasController extends Controller
                         ->where('hora_cita', $request->hora_cita);
                 }),
             ],
-            'razon_cita' => 'required|string|max:255',
+            'motivo_otro' => 'nullable|string|max:255',
         ], $messages);
 
-        $cita = Citas::create([
+        $citaData = [
             'nombre_mascota' => $request->nombre_mascota,
             'raza_mascota' => $request->raza_mascota,
             'nombre_propietario' => $request->nombre_propietario,
@@ -132,7 +138,14 @@ class CitasController extends Controller
             'fecha_cita' => $request->fecha_cita,
             'hora_cita' => $request->hora_cita,
             'razon_cita' => $request->razon_cita,
-        ]);
+        ];
+
+        // Si razon_cita es 'otro' y motivo_otro está presente, guárdalo en la base de datos
+        if ($request->razon_cita === 'otro' && $request->has('motivo_otro') && !empty($request->motivo_otro)) {
+            $citaData['razon_cita'] = $request->motivo_otro;
+        }
+
+        $cita = Citas::create($citaData);
 
         return redirect()->route('citas')->with('success', 'Su cita ha sido registrada.');
     }
@@ -214,7 +227,8 @@ class CitasController extends Controller
 
         // Eliminar la cita
         $citas->delete();
+        
 
-        return redirect()->route('citass');
+        return redirect()->route('citass')->with('success', 'Cita eliminada correctamente.');
     }
 }

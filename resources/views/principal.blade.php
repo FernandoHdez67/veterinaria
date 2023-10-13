@@ -141,11 +141,10 @@
                 <h3>Cachorro PET</h3>
                 <hr>
                 <ul class="list-unstyled text-secondary">
-                    <li><a class="text-decoration-none link-secondary" href="{{ Route('somos') }}">Quienes somos</a>
-                    </li>
-                    <li><a class="text-decoration-none link-secondary" href="{{ route('politicas') }}">Términos y
-                            Condiciones</a></li>
+                    <li><a class="text-decoration-none link-secondary" href="{{ Route('somos') }}">Quienes somos</a></li>
+                    <li><a class="text-decoration-none link-secondary" href="{{ route('politicas') }}">Términos y Condiciones</a></li>
                     <li><a target="_blank" class="text-decoration-none link-secondary" href="{{ asset('archivos/Aviso de privacidad.pdf') }}">Aviso de privacidad</a></li>
+                    <li><a class="text-decoration-none link-secondary" href="{{ route('ayuda') }}">Ayuda</a></li>
                 </ul>
 
             </div>

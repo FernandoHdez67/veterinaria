@@ -8,9 +8,11 @@
 
 @section('content')
 <div class="card">
-    {{-- <div class="card-header">
-        <a class="btn btn-info" href="{{ Route('nuevo-producto') }}"><i class="fa-solid fa-plus"></i> Agregar producto</a>
-    </div> --}}
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div> 
+    @endif
     <div class="card-body">
 
         <div class="table-responsive">
@@ -28,7 +30,6 @@
                         <th scope="col">Hora</th>
                         <th scope="col">Razon</th>
                         <th scope="col">Acciones</th>
-                        {{-- <th scope="col">Acciones</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -47,24 +48,23 @@
                         <td>{{ $citas->razon_cita }}</td>
                         <td>
                             <div class="d-flex justify-content-between">
-                                {{-- <a href="{{ route('categoria.edit', $categoria->idcategoria) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a> --}}
+                                {{-- <a href="{{ route('categoria.edit', $categoria->idcategoria) }}"
+                                    class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a> --}}
                                 <form method="POST" action="{{ route('destroy.cita', $citas->id) }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar esta Cita?')"><i class="fa-solid fa-trash-can"></i></button>
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('¿Estás seguro de que quieres eliminar esta Cita?')"><i
+                                            class="fa-solid fa-trash-can"></i></button>
                                 </form>
                             </div>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
+
             </table>
         </div>
     </div>
 </div>
 @stop
-
-
-
-
-
