@@ -37,10 +37,10 @@
             scope: '.'
         }).then(function (registration) {
             // Registration was successful
-            console.log('Laravel PWA: ServiceWorker registration successful with scope: ', registration.scope);
+            console.log('Laravel PWA: Registro de ServiceWorker exitoso con alcance: ', registration.scope);
         }, function (err) {
             // registration failed :(
-            console.log('Laravel PWA: ServiceWorker registration failed: ', err);
+            console.log('Laravel PWA: Error en el registro de ServiceWorker: ', err);
         });
     }
 </script>
