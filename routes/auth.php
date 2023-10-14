@@ -15,7 +15,7 @@ Route::middleware('guest')->group(function () {
     Route::get('C38<45>^6(v>e3BH}', [RegisteredUserController::class, 'create'])
                 ->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::post('C38<45>^6(v>e3BH}', [RegisteredUserController::class, 'store']);
 
     Route::get('Vh.9v~/8{$jNk&]6d', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
