@@ -14,10 +14,10 @@
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('mystyle/mystyle.css') }}">
 
-    {{-- Google maps
+    {{-- Google maps--}}
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap">
-        </> --}}
+        </> 
     <link rel="stylesheet" href="{{ asset('mystyle/googlemaps.css') }}">
 
     <script src="//code.tidio.co/jy4xt97e32ubz1nmeqqt4jyrjt1kvend.js" async>
@@ -31,7 +31,7 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link rel="icon" href="{{ asset('img/icono.ico') }}">
     {{-- <script src="{{ asset('js/desactivarclickderecho.js') }}"></script> --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
 
     <link rel="stylesheet" href="{{ asset('hover/hover-min.css') }}">
     <link rel="stylesheet" href="{{ asset('hover/hover.css') }}">
