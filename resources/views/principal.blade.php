@@ -5,19 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script>
-        if ('serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/serviceworker.js')
-        .then((registration) => {
-          console.log('Service Worker registrado con éxito:', registration);
-        })
-        .catch((error) => {
-          console.log('Error al registrar el Service Worker:', error);
-        });
-    });
-  }
-    </script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
@@ -30,8 +17,8 @@
     {{-- Google maps
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap">
-        </>
-    <link rel="stylesheet" href="{{ asset('mystyle/googlemaps.css') }}"> --}}
+        </> --}}
+    <link rel="stylesheet" href="{{ asset('mystyle/googlemaps.css') }}">
 
     <script src="//code.tidio.co/jy4xt97e32ubz1nmeqqt4jyrjt1kvend.js" async>
 
@@ -66,6 +53,19 @@
             color: #E15116;
         }
     </style>
+    <script>
+        if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/serviceworker.js')
+        .then((registration) => {
+          console.log('Service Worker registrado con éxito:', registration);
+        })
+        .catch((error) => {
+          console.log('Error al registrar el Service Worker:', error);
+        });
+    });
+  }
+    </script>
 
 
     <title>@yield('title')</title>
