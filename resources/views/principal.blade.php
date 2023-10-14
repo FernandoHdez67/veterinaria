@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="{{ asset('mystyle/mystyle.css') }}">
 
     {{-- Google maps--}}
-    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"> --}}
+    {{-- <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap">
+        --}}
 
     {{-- <link rel="stylesheet" href="{{ asset('mystyle/googlemaps.css') }}"> --}}
 
@@ -26,7 +28,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer>
+    </script>
     <link rel="icon" href="{{ asset('img/icono.ico') }}">
     {{-- <script src="{{ asset('js/desactivarclickderecho.js') }}"></script> --}}
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
@@ -51,19 +54,22 @@
             color: #E15116;
         }
     </style>
+
+
     <script>
-        if ('serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/serviceworker.js')
-        .then((registration) => {
-          console.log('Service Worker registrado con éxito:', registration);
-        })
-        .catch((error) => {
-          console.log('Error al registrar el Service Worker:', error);
-        });
+        window.addEventListener('load', () => {
+            if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/serviceworker.js')
+                .then(registration => {
+                console.log('Service Worker registrado con éxito:', registration);
+            })
+            .catch(error => {
+                console.log('Error al registrar el Service Worker:', error);
+            });
+        }
     });
-  }
     </script>
+
 
 
     <title>@yield('title')</title>
