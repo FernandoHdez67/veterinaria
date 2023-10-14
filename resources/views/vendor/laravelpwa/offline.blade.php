@@ -1,16 +1,20 @@
-@extends('principal')
+@extends('principal') 
 
-@section('title',"Carrito")
+@section('title', 'Sin Conexión')
 
-@section ('contenido')
-
+@section('contenido')
 <div class="container">
-    <center>
-        <div>
-            <h2>No hay conexion a internet</h2>
-        </div>
-    </center>
-</div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Sin Conexión</div>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <div class="card-body">
+                    <h2>No hay conexión a internet.</h2>
+                    <p>Por favor, verifica tu conexión a internet y vuelve a intentarlo.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

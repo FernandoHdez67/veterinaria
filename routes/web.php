@@ -322,6 +322,11 @@ Route::get('/offline', function() {
     return view('vendor.laravelpwa.offline');
 });
 
+Route::get('/offline', function () {
+    return view('vendor.laravelpwa.offline');
+});
+
+
 // Rutas para los archivos CSS y JS
 Route::get('/css/app.css', function () {
     return response()->file(public_path('css/app.css'));
