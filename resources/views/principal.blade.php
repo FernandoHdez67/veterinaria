@@ -55,7 +55,7 @@
     </style>
     <script>
         if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
+                window.addEventListener('load', () => {
       navigator.serviceWorker.register('/public/serviceworker.js')
         .then((registration) => {
           console.log('Service Worker registrado con éxito:', registration);
