@@ -54,24 +54,7 @@
         }
     </style>
 
-
-    <script>
-        window.addEventListener('load', () => {
-            if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/serviceworker.js')
-                .then(registration => {
-                console.log('Service Worker registrado con éxito:', registration);
-            })
-            .catch(error => {
-                console.log('Error al registrar el Service Worker:', error);
-            });
-        }
-    });
-    </script>
-
-
-
-    <title>@yield('title')</title>
+<title>@yield('title')</title>
     @laravelPWA
 </head>
 
