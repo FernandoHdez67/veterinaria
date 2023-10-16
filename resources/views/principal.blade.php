@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cachorro PET es una aplicacion que 
+    ayuda a los usuarios a mejorar su experiencia de servicios y compras
+    de productos de la clinica veterinaria">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -14,12 +17,8 @@
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('mystyle/mystyle.css') }}">
 
-    {{-- Google maps--}}
-    {{-- <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap">
-        --}}
-
-    {{-- <link rel="stylesheet" href="{{ asset('mystyle/googlemaps.css') }}"> --}}
+    {{--
+    <link rel="stylesheet" href="{{ asset('mystyle/googlemaps.css') }}"> --}}
     <script src="//code.tidio.co/jy4xt97e32ubz1nmeqqt4jyrjt1kvend.js" async></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -54,7 +53,7 @@
         }
     </style>
 
-<title>@yield('title')</title>
+    <title>@yield('title')</title>
 
 </head>
 
@@ -167,12 +166,12 @@
                 <hr>
                 <ul class="list-unstyled text-secondary">
                     <li><i class="fa-brands fa-twitter"></i> <a class="text-decoration-none link-secondary"
-                            href="">Twitter</a></li>
+                            href="#">Twitter</a></li>
                     <li><i class="fa-brands fa-square-facebook"></i> <a class="text-decoration-none link-secondary"
                             href="https://web.facebook.com/CachorroPetClinicaVeterinaria" target="_blank">Facebook</a>
                     </li>
                     <li><i class="fa-brands fa-instagram"></i> <a class="text-decoration-none link-secondary"
-                            href="">Instagram</a></li>
+                            href="#">Instagram</a></li>
                     <li><i class="fa-solid fa-envelope"></i> <a class="text-decoration-none link-secondary"
                             href="{{ route('contacto') }}">Contacto</a></li>
 
