@@ -2,7 +2,7 @@ var staticCacheName = "pwa-v" + new Date().getTime();
 var filesToCache = [
     '/offline',
     'css/bootstrap.min.css',
-    'js/bootstrap.min.css',
+    'js/bootstrap.min.js',
     'images/icons/icon-72x72.png',
     'images/icons/icon-96x96.png',
     'images/icons/icon-128x128.png',
