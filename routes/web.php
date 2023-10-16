@@ -318,7 +318,7 @@ Route::get('/prediccion', function () {
 Route::post('/pred', [App\Http\Controllers\PredictionController::class,'getP rediction'])->name('prediccion');
 
 
-// Route::get('/offline', function () {
-//     return view('vendor.laravelpwa.offline');
-// });
+Route::get('/offline', function () {
+    return view('vendor.laravelpwa.offline');
+});
 
