@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'name' => 'CachorroPET',
+    'name' => 'Cachorro PET',
     'manifest' => [
         'name' => 'Cachorro PET',
-        'short_name' => 'PET',
+        'short_name' => 'Cachorro PET',
         'start_url' => '/',
         'background_color' => '#E15116',
         'theme_color' => '#000000',
