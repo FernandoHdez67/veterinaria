@@ -30,7 +30,7 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
-Route::get('/', [App\Http\Controllers\CarrucelController::class, 'carrucel'])->name('inicio');
+Route::get('/inicio', [App\Http\Controllers\CarrucelController::class, 'carrucel'])->name('inicio');
 
 Route::post('/logoute', [App\Http\Controllers\AuthController::class, 'logout'])->name('logoute');
 
@@ -322,3 +322,9 @@ Route::get('/offline', function () {
     return view('vendor.laravelpwa.offline');
 });
 
+
+// routes/web.php
+
+Route::get('/', function () {
+    return view('splashscreen');
+})->name('splash');
