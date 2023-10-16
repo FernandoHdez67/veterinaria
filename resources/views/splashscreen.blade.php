@@ -1,4 +1,4 @@
-<!-- resources/views/splash.blade.php -->
+{{-- <!-- resources/views/splash.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,4 +25,4 @@
         window.location.href = "{{ route('inicio') }}"; // Reemplaza 'home' con el nombre de la ruta de tu página principal
     }, 3000); // Redirige después de 3 segundos (3000 milisegundos)
 </script>
-
+ --}}
