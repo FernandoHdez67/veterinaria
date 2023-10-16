@@ -44,8 +44,6 @@
 
     </script>
 
-    <script src="{{ asset('js/ajax.js') }}"></script>
-
     <style>
         .active-link {
             background-color: rgb(3, 151, 161);
@@ -61,7 +59,7 @@
     <div class="contentido">
         <nav class="navbar navbar-expand-lg navbar-light bg-primary" onclick="changeNavColor()">
             <div class="container-fluid">
-                <a id="div-btn1" href="<?= route('inicio') ?>"><img id="div-btn1"
+                <a href="<?= route('inicio') ?>"><img
                         src="{{ asset('img/logocirculo.png') }}" width="50px" height="50px" alt=""></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -72,46 +70,45 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                         <li class="nav-item">
-                            <a id="div-btn1" href="#"></a>
-                            <a id="div-btn1" style="color: white"
+                            <a style="color: white"
                                 class="nav-link  <?php if(Route::current()->getName() == 'inicio') echo 'active-link'; ?> hvr-underline-from-left"
                                 aria-current="page" href="<?= Route('inicio') ?>"><b><i class="fa-solid fa-house"></i>
                                     Inicio</b></a>
                         </li>
                         <li class="nav-item">
-                            <a id="div-btn1" style="color: white"
+                            <a style="color: white"
                                 class="nav-link <?php if(Route::current()->getName() == 'somos') echo 'active-link'; ?> hvr-underline-from-left"
                                 aria-current="page" href="<?= Route('somos') ?>"><b><i
                                         class="fa-solid fa-circle-info"></i> Quienes somos</b></a>
                         </li>
                         <li class="nav-item">
-                            <a id="div-btn1" style="color: white"
+                            <a style="color: white"
                                 class="nav-link <?php if(Route::current()->getName() == 'productos') echo 'active-link'; ?> hvr-underline-from-left"
                                 aria-current="page" href="{{ Route('productos') }}"><b><i
                                         class="fa-solid fa-shield-dog"></i> Productos</b></a>
                         </li>
 
                         <li class="nav-item">
-                            <a id="div-btn1" style="color: white"
+                            <a style="color: white"
                                 class="nav-link <?php if(Route::current()->getName() == 'servicios') echo 'active-link'; ?> hvr-underline-from-left"
                                 aria-current="page" href="<?= Route('servicios') ?>"><b><i
                                         class="fa-solid fa-syringe"></i> Servicios</b></a>
                         </li>
 
                         <li class="nav-item">
-                            <a id="div-btn1" style="color: white"
+                            <a style="color: white"
                                 class="nav-link <?php if(Route::current()->getName() == 'citas') echo 'active-link'; ?> hvr-underline-from-left"
                                 aria-current="page" href="<?= Route('citas') ?>"><b><i
                                         class="fa-regular fa-calendar-days"></i> Citas</b></a>
                         </li>
                         <li class="nav-item">
-                            <a id="div-btn1" style="color: white"
+                            <a style="color: white"
                                 class="nav-link <?php if(Route::current()->getName() == 'ayuda') echo 'active-link'; ?> hvr-underline-from-left"
                                 aria-current="page" href="<?= Route('ayuda') ?>"><b><i
                                         class="fa-solid fa-circle-question"></i> Ayuda</b></a>
                         </li>
                     </ul>
-                    <a id="div-btn1" style="text-decoration: none; color:white" href="{{ Route('carrito.index') }}">
+                    <a style="text-decoration: none; color:white" href="{{ Route('carrito.index') }}">
                         <b style="margin-right: 10px"><i class="fa-solid fa-cart-plus fa-xl"
                                 style="color: #ffffff;"></i></i> Carrito</b>
                     </a>
@@ -123,7 +120,7 @@
                                     class="fa-solid fa-right-from-bracket fa-rotate-180"></i> Cerrar sesión</b></button>
                     </form>
                     @else
-                    <a id="div-btn1" class="btn btn-rojopet" href="{{ route('iniciar') }}"><b style="color: white"><i
+                    <a class="btn btn-rojopet" href="{{ route('iniciar') }}"><b style="color: white"><i
                                 class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión</b></a>
                     @endif
                 </div>
