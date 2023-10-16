@@ -62,7 +62,7 @@
                 <div class="">
                     <div class="col hvr-glow">
                         <div class="card shadow-sm " style="width: 18rem;">
-                            <a href="{{ route('detalles', [$productos->idproducto]) }}"><img src="{{ 'imgproductos/'.$productos->imagen}}" class="card-img-top" alt="" width="300px" height="200px"></a>
+                            <a href="{{ route('detalles', [$productos->idproducto]) }}"><img src="{{ 'imgproductos/'.$productos->imagen}}" class="card-img-top" alt="{{$productos->nombre}}" width="300px" height="200px"></a>
                             <div class="card-body">
                                 <h5 class="card-title">{{$productos->nombre}}</h5>
                                 <p class="card-text"><b>$</b> {{$productos->precio}}</p>

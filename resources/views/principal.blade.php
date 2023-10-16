@@ -62,7 +62,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-primary" onclick="changeNavColor()">
             <div class="container-fluid">
                 <a id="div-btn1" href="<?= route('inicio') ?>"><img id="div-btn1"
-                        src="{{ asset('img/logocirculo.png') }}" width="50px" height="50px" alt=""></a>
+                        src="{{ asset('img/logocirculo.png') }}" width="50px" height="50px" alt="logotipo"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
