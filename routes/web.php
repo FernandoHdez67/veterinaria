@@ -318,21 +318,7 @@ Route::get('/prediccion', function () {
 Route::post('/pred', [App\Http\Controllers\PredictionController::class,'getP rediction'])->name('prediccion');
 
 
-Route::get('/offline', function () {
-    return view('vendor.laravelpwa.offline');
-});
+// Route::get('/offline', function () {
+//     return view('vendor.laravelpwa.offline');
+// });
 
-
-// Rutas para los archivos CSS y JS
-Route::get('/css/app.css', function () {
-    return response()->file(public_path('css/app.css'));
-});
-
-Route::get('/js/app.js', function () {
-    return response()->file(public_path('js/app.js'));
-});
-
-// Rutas para las imágenes
-Route::get('/images/icons/icon-72x72.png', function () {
-    return response()->file(public_path('images/icons/icon-72x72.png'));
-});

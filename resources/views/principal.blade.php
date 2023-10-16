@@ -55,7 +55,7 @@
     </style>
 
 <title>@yield('title')</title>
-    @laravelPWA
+
 </head>
 
 <body>

@@ -23,9 +23,7 @@
         "sass": "^1.56.1",
         "tailwindcss": "^3.2.1",
         "vite": "^4.0.0",
-        "vite-plugin-manifest": "^0.0.1",
-        "workbox-cli": "^7.0.0",
-        "workbox-sw": "^7.0.0"
+        "vite-plugin-manifest": "^0.0.1"
     },
     "dependencies": {
         "@vitejs/plugin-react": "^3.0.1",
