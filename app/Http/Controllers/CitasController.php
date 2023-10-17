@@ -218,7 +218,6 @@ class CitasController extends Controller
     public function destroy($id)
     {
 
-
         $citas = Citas::find($id);
 
         if (!$citas) {
@@ -231,4 +230,5 @@ class CitasController extends Controller
 
         return redirect()->route('citass')->with('success', 'Cita eliminada correctamente.');
     }
+    
 }
