@@ -16,8 +16,7 @@ class CarruselController extends Controller
         $imagenes = [];
         foreach ($carrusels as $carrusel) {
             $imagenPath = 'imgcarrucel/' . $carrusel->imagen;
-            $imagenUrl = Storage::url($imagenPath);
-            $imagenes[] = $imagenUrl;
+            $imagenes[] = $imagenPath;
         }
 
         // Devolver las rutas de las imágenes como respuesta
