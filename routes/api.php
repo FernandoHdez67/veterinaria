@@ -18,5 +18,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+//Mostrar imagenesdel carrucel
 Route::get('/carrusel', [App\Http\Controllers\CarruselController::class,'index']); //muestra todos los registros
