@@ -1,86 +1,27 @@
-# 2022 update
-FROM php:8.1-fpm
+# Utilizamos una imagen base con PHP y Apache
+FROM php:8.1-apache
 
-# setup user as root
-USER root
+# Instalamos las extensiones de PHP necesarias para Laravel
+RUN docker-php-ext-install pdo_mysql
 
-WORKDIR /var/www
+# Habilitamos el mod_rewrite de Apache para permitir el enrutamiento de Laravel
+RUN a2enmod rewrite
 
-# setup node js source will be used later to install node js
-RUN curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh
-RUN ["sh",  "./nodesource_setup.sh"]
+# Establecemos el directorio de trabajo en el servidor web de Apache
+WORKDIR /var/www/html
 
-# Install environment dependencies
-RUN apt-get update \
- # gd
- && apt-get install -y build-essential  openssl nginx libfreetype6-dev libjpeg-dev libpng-dev libwebp-dev zlib1g-dev libzip-dev gcc g++ make vim unzip curl git jpegoptim optipng pngquant gifsicle locales libonig-dev nodejs  \
- && docker-php-ext-configure gd  \
- && docker-php-ext-install gd \
- # gmp
- && apt-get install -y --no-install-recommends libgmp-dev \
- && docker-php-ext-install gmp \
- # pdo_mysql
- && docker-php-ext-install pdo_mysql mbstring \
- # pdo
- && docker-php-ext-install pdo \
- # opcache
- && docker-php-ext-enable opcache \
- # exif
-    && docker-php-ext-install exif \
-    && docker-php-ext-install sockets \
-    && docker-php-ext-install pcntl \
-    && docker-php-ext-install bcmath \
- # zip
- && docker-php-ext-install zip \
- && apt-get autoclean -y \
- && rm -rf /var/lib/apt/lists/* \
- && rm -rf /tmp/pear/
+# Copiamos los archivos de tu proyecto Laravel al contenedor
+COPY . /var/www/html
 
-# Copy files
-COPY . /var/www
+# Establecemos los permisos adecuados para los archivos de Laravel
+RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 775 /var/www/html/storage
 
-COPY ./deploy/local.ini /usr/local/etc/php/local.ini
+# Configuramos el archivo de host virtual de Apache para Laravel
+COPY laravel.conf /etc/apache2/sites-available/000-default.conf
 
-COPY ./deploy/conf.d/nginx.conf /etc/nginx/nginx.conf
-
-RUN chmod +rwx /var/www
-
-RUN chmod -R 777 /var/www
-
-# setup FE
-RUN npm install
-
-RUN npm rebuild node-sass
-
-RUN npm run prod
-
-# setup composer and laravel
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-RUN composer install --working-dir="/var/www"
-
-RUN composer dump-autoload --working-dir="/var/www"
-
-RUN php artisan optimize
-
-RUN php artisan route:clear
-
-RUN php artisan route:cache
-
-RUN php artisan config:clear
-
-RUN php artisan config:cache
-
-RUN php artisan view:clear
-
-RUN php artisan view:cache
-
-# remove this line if you do not want to run migrations on each build
-RUN php artisan migrate --force
-
+# Exponemos el puerto 80 para acceder a la aplicación Laravel
 EXPOSE 80
 
-RUN ["chmod", "+x", "post_deploy.sh"]
-
-CMD [ "sh", "./post_deploy.sh" ]
-# CMD php artisan serve --host=127.0.0.1 --port=8000
+# Comando para iniciar Apache cuando el contenedor se ejecute
+CMD ["apache2-foreground"]
