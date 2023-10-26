@@ -1,6 +1,6 @@
 @extends('principal')
 
-@section('title',"Quienes Somos")
+@section('title',"Quienes Somos | Cachorro PET")
 
 @section ('contenido')
 {{ Breadcrumbs::render('quienessomos') }}

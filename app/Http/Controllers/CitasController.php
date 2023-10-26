@@ -51,7 +51,7 @@ class CitasController extends Controller
             ->orWhere('edad_mascota', 'LIKE', '%' . $texto . '%')
             ->orWhere('sexo_mascota', 'LIKE', '%' . $texto . '%')
             ->orWhere('fecha_cita', 'LIKE', '%' . $texto . '%')
-            ->orWhere('tbl_horarios.horario', 'LIKE', '%' . $texto . '%') // Aquí también debes cambiar a 'tbl_horarios.horario'
+            ->orWhere('tbl_horarios.horario', 'LIKE', '%' . $texto . '%')
             ->orWhere('razon_cita', 'LIKE', '%' . $texto . '%')
             ->orderBy('nombre_mascota', 'asc')
             ->paginate(30);

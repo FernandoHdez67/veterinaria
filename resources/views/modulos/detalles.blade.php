@@ -1,6 +1,6 @@
 @extends('principal')
 
-@section('title',"Detalle")
+@section('title',"Detalle | Cachorro PET")
 
 @section ('contenido')
 <div class="breadcrumbs">

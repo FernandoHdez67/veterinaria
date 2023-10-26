@@ -3,6 +3,7 @@ var filesToCache = [
     '/offline',
     'css/bootstrap.min.css',
     'js/bootstrap.min.js',
+    'img/no-wifi.png',
     'images/icons/icon-72x72.png',
     'images/icons/icon-96x96.png',
     'images/icons/icon-128x128.png',
@@ -50,4 +51,6 @@ self.addEventListener("fetch", event => {
             })
     )
 });
+
+
 

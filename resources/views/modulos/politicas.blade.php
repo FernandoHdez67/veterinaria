@@ -1,6 +1,6 @@
 @extends('principal')
 
-@section('title',"Politicas de privacidad")
+@section('title',"Politicas de privacidad | Cachorro PET")
 
 @section ('contenido')
 {{ Breadcrumbs::render('politicas') }}

@@ -9,20 +9,23 @@ use Illuminate\Support\Facades\File;
 
 class CarruselController extends Controller
 {
+
+
     public function index()
     {
-        $imagenesPath = public_path('imgcarrucel');
-        $imagenes = [];
+        $carrusels = Carrusel::all();
+        $carruselFormateados = [];
 
-        // Obtener la lista de archivos en el directorio
-        $archivos = File::files($imagenesPath);
-
-        // Obtener las URLs de las imágenes
-        foreach ($archivos as $archivo) {
-            $imagenes[] = url('imgcarrucel/' . $archivo->getFilename());
+        foreach ($carrusels as $carrusel) {
+            $imagenNombre = $carrusel->imagen; // Obtener el nombre de la imagen
+            $imagenRuta = url('imgcarrucel/' . $imagenNombre); // Obtener la URL completa de la imagen
+            $carruselFormateado = [
+                'imagen' => $imagenRuta,
+            ];
+            $carruselFormateados[] = $carruselFormateado;
         }
 
-        // Devolver las rutas de las imágenes como respuesta
-        return response()->json(['imagenes' => $imagenes]);
+        // Devolver los servicios formateados como respuesta
+        return response()->json($carruselFormateados);
     }
 }

@@ -1,18 +1,22 @@
 $(document).ready(function() {
-    // Asignar evento click a los elementos del menú
-    $('#div-btn1').click(function(e) {
-        e.preventDefault(); // Prevenir la acción por defecto del enlace
-        
-        // Obtener la URL del enlace
-        var url = $(this).attr('href');
-        
-        // Realizar la solicitud AJAX
+    $('#inicio').click(function(event) {
+        event.preventDefault(); // Previene el comportamiento por defecto del enlace
+
+        // Realiza la solicitud AJAX
         $.ajax({
-            url: url,
+            url: '/resources/views/welcome.blade.php', // Reemplaza esto con la ruta de tu controlador o endpoint de Laravel
+            type: 'GET',
+            dataType: 'html',
             success: function(data) {
-                // Actualizar el contenido en el elemento con la clase "content"
-                $('.contenido').html(data);
+                // Manipula los datos recibidos (por ejemplo, actualiza el contenido de un div)
+                $('#resultado').html(data);
+            },
+            error: function(error) {
+                console.log(error); // Maneja errores si los hay
             }
         });
     });
 });
+
+
+

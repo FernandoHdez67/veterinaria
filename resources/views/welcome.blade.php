@@ -1,6 +1,6 @@
 @extends('principal')
 
-@section('title',"Clinica Veterinaria | Cachorro Pet")
+@section('title',"Inicio | Cachorro PET")
 
 @section ('contenido')
 {{ Breadcrumbs::render('inicio') }}

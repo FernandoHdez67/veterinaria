@@ -1,6 +1,6 @@
 @extends('principal')
 
-@section('title',"Citas")
+@section('title',"Citas | Cachorro PET")
 
 @section ('contenido')
 {{ Breadcrumbs::render('citas') }}

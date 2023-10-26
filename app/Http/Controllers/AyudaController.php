@@ -25,6 +25,12 @@ class AyudaController extends Controller
     {
         //
     }
+    public function apipregunta(Request $request)
+    {
+        $pregunta = Ayuda::all();
+        return response()->json($pregunta);
+        
+    }
 
     public function ayudamostrar(Request $request)
     {
