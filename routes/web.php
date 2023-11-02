@@ -322,7 +322,6 @@ Route::get('/offline', function () {
     return view('vendor.laravelpwa.offline');
 });
 
-
 // routes/web.php
 
 // Route::get('/', function () {
