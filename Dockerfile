@@ -1,47 +1,33 @@
-FROM php:8.1-apache
+# Usa la imagen oficial de PHP con Apache como servidor web
+FROM php:apache
 
-LABEL maintainer="jaivic"
+# Establece el directorio de trabajo en el contenedor
+WORKDIR /var/www/html
 
-# Habilitar mod_rewrite en Apache
-RUN a2enmod rewrite
-
-# Instalar dependencias y extensiones necesarias
+# Instala las dependencias de Laravel y otras herramientas necesarias
 RUN apt-get update && apt-get install -y \
-        zlib1g-dev \
-        libicu-dev \
-        libxml2-dev \
-        libpq-dev \
-        vim \
-        git \
-    && docker-php-ext-install pdo pdo_mysql zip intl xmlrpc soap opcache \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    git \
+    unzip \
+    libzip-dev \
+    && docker-php-ext-install zip pdo_mysql
 
-# Instalar Node.js y npm
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
-    && apt-get install -y nodejs \
-    && apt-get autoremove -y
+# Copia los archivos de la aplicación al contenedor
+COPY . /var/www/html
 
-# Copiar archivos de configuración de Apache y PHP
-COPY docker/apache/vhost.conf /etc/apache2/sites-available/000-default.conf
-COPY docker/apache/apache2.conf /etc/apache2/apache2.conf
-COPY docker/php/php.ini /usr/local/etc/php/php.ini
+# Instala las dependencias de Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Configurar el entorno de Composer
-ENV COMPOSER_ALLOW_SUPERUSER 1
+# Instala las dependencias de la aplicación Laravel
+RUN composer install
 
-# Copiar el código fuente de la aplicación
-WORKDIR /var/www/html/
-COPY . /var/www/html/
+# Configura los permisos de almacenamiento de Laravel (ajústalo según tus necesidades)
+RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Configurar permisos y ejecutar Composer install al final para aprovechar el caché de capas
-RUN chown -R www-data:www-data /var/www/html \
-    && composer install --no-dev --optimize-autoloader --prefer-dist \
-    && rm -rf /root/.composer/cache
+# Genera una clave de aplicación de Laravel
+RUN php artisan key:generate
 
-# Limpiar el sistema de paquetes innecesarios y cachés
-RUN apt-get purge -y --auto-remove git \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-
+# Expone el puerto 80 para que Apache pueda servir la aplicación
 EXPOSE 80
 
+# Comando para iniciar el servidor web de Apache
 CMD ["apache2-foreground"]
