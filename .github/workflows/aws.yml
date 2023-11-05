@@ -35,7 +35,7 @@ env:
   ECR_REPOSITORY: cachorropet           # set this to your Amazon ECR repository name
   ECS_SERVICE: MY_ECS_SERVICE                 # set this to your Amazon ECS service name
   ECS_CLUSTER: ClusterCachorroPET                 # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: https://github.com/FernandoHdez67/appvt/blob/633b6959ade9a78f0a6fbae08969bf28e60213b8/tarea-1-revision1-AWS-CLI-input.json # set this to the path to your Amazon ECS task definition
+  ECS_TASK_DEFINITION: tarea-1-revision1.json # set this to the path to your Amazon ECS task definition
                                               # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: ClusterCachorroPET           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
