@@ -21,7 +21,7 @@ RUN composer install
 # Set environment variables for AWS ECS
 ENV AWS_REGION=us-east-2
 ENV ECR_REPOSITORY=cachorropet
-ENV ECS_SERVICE=MY_ECS_SERVICE
+ENV ECS_SERVICE=aws-service 
 ENV ECS_CLUSTER=ClusterCachorroPET
 ENV ECS_TASK_DEFINITION=./tarea-1-revision1.json
 ENV CONTAINER_NAME=cachorropet

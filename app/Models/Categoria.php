@@ -11,5 +11,5 @@ class Categoria extends Model
    public $timestamps = false;
    protected $primaryKey="idcategoria";
    protected $table="tbl_categoria";
-   protected $fillable = [ 'categoria'];
+   protected $fillable = [ 'categoria','imagencat'];
 }

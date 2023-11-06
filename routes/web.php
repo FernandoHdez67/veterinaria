@@ -72,6 +72,7 @@ Route::get('/citas', [App\Http\Controllers\CitasController::class, 'horario'])->
 
 // Ruta para procesar los datos del formulario y almacenar la nueva cita
 Route::post('/citas', [App\Http\Controllers\CitasController::class, 'store'])->name('registro.citas');
+//Route::post('/citas', [App\Http\Controllers\CitasController::class, 'store'])->name('registro.citas')->middleware('auth');
 
 
 

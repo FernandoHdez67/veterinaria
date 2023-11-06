@@ -8,16 +8,28 @@
 
 @section('content')
 <div class="card">
-    <form action="{{ route('insertar.categoria') }}" method="POST" style="margin:10px">
+    <form action="{{ route('insertar.categoria') }}" method="POST" style="margin:10px" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
                     <label for="categoria">Categoria <b style="color: red">*</b></label>
-                    <input type="text" name="categoria" id="categoria" class="form-control @error('categoria') is-invalid @enderror" value="{{ old('categoria') }}">
+                    <input type="text" name="categoria" id="categoria"
+                        class="form-control @error('categoria') is-invalid @enderror" value="{{ old('categoria') }}">
                     <div class="invalid-feedback" id="categoria-error"></div>
-
                 </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="imagencat" class="form-label">Imagen<b style="color: red">*</b></label>
+                    <input class="form-control @error('imagencat') is-invalid @enderror" name="imagencat" type="file"
+                        id="imagencat" accept="image/jpeg, image/png">
+                    <div class="invalid-feedback" id="imagen-error"></div>
+                </div>
+            </div><br>
+        </div>
+        <div class="col-3">
+            <div class="form-group">
                 <button type="submit" class="btn btn-success"><i class="fa-solid fa-plus"></i> Agregar Categoria</button>
             </div>
         </div>
@@ -30,22 +42,27 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Categoria</th>
+                        <th scope="col">Imagen</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categoria as $categoria)
+                    @foreach ($categoria as $category)
                     <tr>
 
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $categoria->categoria }}</td>
+                        <td>{{ $category->categoria }}</td>
+                        <td><img src="{{ 'imgcategorias/'.$category->imagencat}}" class="card-img-top" alt="" width="50px" height="60px"></td>
                         <td>
                             <div class="d-flex justify-content-between">
-                                <a href="{{ route('categoria.edit', $categoria->idcategoria) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <form method="POST" action="{{ route('destroy.categoria', $categoria->idcategoria) }}">
+                                <a href="{{ route('categoria.edit', $category->idcategoria) }}"
+                                    class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <form method="POST" action="{{ route('destroy.categoria', $category->idcategoria) }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar esta Categoria?')"><i class="fa-solid fa-trash-can"></i></button>
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('¿Estás seguro de que quieres eliminar esta Categoria?')"><i
+                                            class="fa-solid fa-trash-can"></i></button>
                                 </form>
                             </div>
                         </td>

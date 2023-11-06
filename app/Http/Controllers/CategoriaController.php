@@ -6,6 +6,7 @@ use App\Models\sf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Categoria;
+use Illuminate\Support\Facades\Storage;
 
 class CategoriaController extends Controller
 {
@@ -18,11 +19,30 @@ class CategoriaController extends Controller
     {
         $texto = trim($request->get('texto'));
         $categoria = DB::table('tbl_categoria')
-            ->select('idcategoria', 'categoria')
+            ->select('idcategoria', 'categoria', 'imagencat')
             ->where('categoria', 'LIKE', '%' . $texto . '%')
             ->paginate(30);
 
         return view('admin.admin_categoria', compact('categoria', 'texto'));
+    }
+
+    public function listacategorias()
+    {
+        $categorias = Categoria::all();
+        $categoriaFormateados = [];
+
+        foreach ($categorias as $categoria) {
+            $imagenNombre = $categoria->imagencat; // Obtener el nombre de la imagen
+            $imagenRuta = url('imgcategorias/' . $imagenNombre); // Obtener la URL completa de la imagen
+            $categoriaFormateado = [
+                'categoria'=>$categoria->categoria,
+                'imagencat' => $imagenRuta,
+            ];
+            $categoriaFormateados[] = $categoriaFormateado;
+        }
+
+        // Devolver los servicios formateados como respuesta
+        return response()->json($categoriaFormateados);
     }
 
 
@@ -45,20 +65,32 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        $messages = [
-            'categoria.required' => 'La Categoria es obligatoria.',
-        ];
-
         $request->validate([
-            'categoria' => 'required|string',
-        ], $messages);
+            'categoria' => 'required',
+            'imagencat' => 'required|image|max:10240', // máximo 10 MB
+        ], [
+            'categoria.required' => 'La categoria del producto es obligatoria.',
+            'imagencat.required' => 'Debe seleccionar una imagen.',
+            'imagencat.image' => 'El archivo seleccionado debe ser una imagen.',
+            'imagencat.max' => 'El tamaño máximo de la imagen es 10 MB.',
+        ]);
 
+        $imagencat = $request->file('imagencat');
+        $nombre_imagen = uniqid() . '.' . $imagencat->getClientOriginalExtension();
+        $imagencat->move(public_path('imgcategorias'), $nombre_imagen);
 
         $categoria = Categoria::create([
             'categoria' => $request->categoria,
+            'imagencat' => $nombre_imagen,
         ]);
 
-        $categoria = Categoria::all();
+        $texto = trim($request->get('texto'));
+        $categoria = DB::table('tbl_categoria')
+            ->select('idcategoria', 'categoria', 'imagencat')
+            ->orderBy('categoria', 'asc')
+            ->paginate(30);
+
+
         return view('admin.admin_categoria', compact('categoria'));
     }
 
@@ -94,13 +126,26 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, Categoria $idcategoria)
     {
-        $messages = [
-            'categoria.required' => 'La categoria es obligatoria.',
-        ];
-
         $request->validate([
-            'categoria' => 'required|string',
-        ], $messages);
+            'categoria' => 'required',
+        ], [
+            'categoria.required' => 'La categoria del producto es obligatoria.',
+            'imagencat.required' => 'Debe seleccionar una imagen.',
+            'imagencat.image' => 'El archivo seleccionado debe ser una imagen.',
+            'imagencat.max' => 'El tamaño máximo de la imagen es 10 MB.',
+        ]);
+
+        if ($request->hasFile('imagencat')) {
+            // Borramos la imagen anterior si existe
+            if ($idcategoria->imagencat) {
+                Storage::delete('public/imgcategorias/' . $idcategoria->imagencat);
+            }
+
+            // Guardamos la nueva imagen en el sistema de archivos
+            $imageName = time() . '.' . $request->file('imagencat')->getClientOriginalExtension();
+            $request->file('imagencat')->move(public_path('imgcategorias'), $imageName);
+            $idcategoria->imagencat = $imageName;
+        }
 
         // Actualizamos el resto de los campos
         $idcategoria->categoria = $request->input('categoria');
@@ -126,7 +171,13 @@ class CategoriaController extends Controller
             abort(404);
         }
 
-        // Eliminar la pregunta
+        // Eliminar la imagen asociada con el producto
+        $imagen_path = public_path('imgcategorias/' . $categoria->imagencat);
+        if (file_exists($imagen_path)) {
+            unlink($imagen_path);
+        }
+
+        // Eliminar el producto
         $categoria->delete();
 
         return redirect()->route('categorias');

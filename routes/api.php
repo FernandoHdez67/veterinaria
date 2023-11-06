@@ -26,7 +26,6 @@ Route::post('/productos', [App\Http\Controllers\ProductosController::class,'stor
 Route::put('/productos/{idproducto}', [App\Http\Controllers\ProductosController::class,'update']); // actualiza un registro
 Route::delete('/productos/{idproducto}', [App\Http\Controllers\ProductosController::class,'destroy']); //elimina un registro
 
-
 Route::get('/citas', [App\Http\Controllers\CitassController::class,'citas']); //muestra todos los registros
 Route::get('/citasss', [App\Http\Controllers\CitassController::class,'index']); //muestra todos los registros pero con la hora con ID
 Route::get('citas/{id}',[App\Http\Controllers\CitassController::class,'getCategoriaxid']);//Buscar por id
@@ -47,7 +46,6 @@ Route::delete('/eliminar-cita', [App\Http\Controllers\CitassController::class,'e
 
 Route::get('/horarios', [App\Http\Controllers\CitassController::class,'horariosDisponibles']); //Mostrar citas por dia de la semana
 
-
 Route::get('/servicios', [App\Http\Controllers\ServiciossController::class,'index']); //muestra todos los registros
 Route::get('servicios/{idservicios}',[App\Http\Controllers\ServiciossController::class,'getServicioxid']);//Buscar por id
 Route::post('/servicios', [App\Http\Controllers\ServiciossController::class,'store']); // crea un registro
@@ -59,7 +57,8 @@ Route::get('/servicio-ccampo', [App\Http\Controllers\ServiciossController::class
 Route::get('/servicio-scampo', [App\Http\Controllers\ServiciossController::class,'buscarServiciosincampo']); //muestra el nombre del servico sin su campo
 Route::get('/servicios-all', [App\Http\Controllers\ServiciossController::class,'servicios']); //muestra el nombre del servico sin su campo
 
-//Mostrar imagenesdel carrucel
-Route::get('/carrusel', [App\Http\Controllers\CarruselController::class,'index']); //muestra todos los registros
 
+Route::get('/carrusel', [App\Http\Controllers\CarruselController::class,'index']); //muestra todos los registros
 Route::get('/ayuda', [App\Http\Controllers\AyudaController::class,'apipregunta']); //muestra todos los registros
+
+Route::get('/categorias', [App\Http\Controllers\CategoriaController::class,'listacategorias']); //muestra todos los registros

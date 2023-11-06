@@ -11,6 +11,7 @@ use DateTime;
 use DateInterval;
 use Illuminate\Validation\Rule;
 use App\Models\Servicio;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -78,6 +79,8 @@ class CitasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
     public function store(Request $request)
     {
         $messages = [
@@ -226,9 +229,8 @@ class CitasController extends Controller
 
         // Eliminar la cita
         $citas->delete();
-        
+
 
         return redirect()->route('citass')->with('success', 'Cita eliminada correctamente.');
     }
-    
 }

@@ -10,7 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
 
@@ -22,7 +23,9 @@
     <link rel="stylesheet" href="{{ asset('mystyle/googlemaps.css') }}"> --}}
     <script src="//code.tidio.co/jy4xt97e32ubz1nmeqqt4jyrjt1kvend.js" async></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://www.google.com/recaptcha/api.js" async defer>
@@ -99,10 +102,18 @@
                         </li>
 
                         <li class="nav-item">
-                            <a style="color: white"
+                         
+                            @if (session()->has('idusuario'))
+                            <form action="{{ route('logoute') }}" method="POST">
+                                @csrf
+                                <a style="color: white"
                                 class="nav-link <?php if(Route::current()->getName() == 'citas') echo 'active-link'; ?> hvr-underline-from-left"
                                 aria-current="page" href="<?= Route('citas') ?>"><b><i
                                         class="fa-regular fa-calendar-days"></i> Citas</b></a>
+                            </form>
+                            @else
+                            <a></a>
+                            @endif
                         </li>
                         <li class="nav-item">
                             <a style="color: white"

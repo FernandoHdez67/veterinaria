@@ -15,7 +15,7 @@
     <div class="card-body">
         <div class="container">
             <div class="abs-center-registro">
-                <form action="{{ route('categoria.update', $categoria->idcategoria) }}" method="POST" style="margin:10px">
+                <form action="{{ route('categoria.update', $categoria->idcategoria) }}" method="POST" style="margin:10px" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="row">
@@ -24,6 +24,13 @@
                                 <label for="categoria">Categoria <b style="color: red">*</b></label>
                                 <input type="text" name="categoria" id="categoria" class="form-control @error('categoria') is-invalid @enderror" value="{{ $categoria->categoria }}">
                                 <div class="invalid-feedback" id="categoria-error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="imagencat">Imagen:</label>
+                                <input type="file" class="form-control @error('imagencat') is-invalid @enderror" id="imagencat" name="imagencat"><br>
+                                {{ $categoria->imagencat }}
+                                <img src="{{ asset('imgcategorias/' . $categoria->imagencat) }}" alt="{{ $categoria->categoria }}" height="100px" width="100px" class="img-thumbnail">
+                                <div class="invalid-feedback" id="imagen-error"></div>
                             </div>
                             <button type="submit" class="btn btn-success">Actualizar</button>
                             <a href="{{ route('categorias') }}" class="btn btn-secondary">Cancelar</a>
