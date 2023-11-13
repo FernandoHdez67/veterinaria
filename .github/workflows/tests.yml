@@ -21,6 +21,8 @@ jobs:
           php-version: 8.1
           coverage: true
       - name: Run tests
+        env:
+          PATH: "$PATH:/c/xampp/php/phpunit"
         run: phpunit --coverage-html=tests/coverage
       - name: Upload coverage report
         uses: actions/upload-artifact@v2
