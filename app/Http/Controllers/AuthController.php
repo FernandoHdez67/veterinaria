@@ -27,15 +27,16 @@ class AuthController extends Controller
 
         if ($usuario && password_verify($credentials['password'], $usuario->password)) {
             $request->session()->regenerate();
-            session(['idusuario' => $usuario->idusuario]);
+            session(['idusuario' => $usuario->idusuario, 'nombreUsuario' => $usuario->nombre]); // Agrega el nombre de usuario
 
-            return view('welcome', ['usuario' => $usuario],['carrucel'=>$carrucel]);
+            return view('welcome', ['usuario' => $usuario], ['carrucel' => $carrucel]);
         }
 
         return back()->withErrors([
             'email' => 'Las credenciales proporcionadas son incorrectas.',
         ]);
     }
+
 
 
 

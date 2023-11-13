@@ -11,6 +11,12 @@ class Usuarios extends Model
     // use HasFactory;
     public $timestamps = false;
     protected $table = 'tbl_usuarios';
-    protected $fillable = ['nombre', 'apaterno', 'amaterno', 'telefono', 'email', 'direccion', 'nombre_usuario', 'idpreguntasecreta', 'respuesta', 'password','remember_token'];  
+    protected $primaryKey = "idusuario";
+    protected $fillable = ['nombre', 'apaterno', 'amaterno', 'telefono', 'email', 'direccion', 'nombre_usuario', 'idpreguntasecreta', 'respuesta', 'password','remember_token'];
 
+    // Relación con la tabla tbl_horarios
+    public function preguntasecreta()
+    {
+        return $this->belongsTo(PreguntaSecreta::class, 'idpreguntasecreta', 'idpreguntasecreta');
+    }
 }

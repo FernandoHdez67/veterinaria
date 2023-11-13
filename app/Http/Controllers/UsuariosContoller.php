@@ -9,6 +9,7 @@ use App\Models\Usuarios;
 use Illuminate\Support\Facades\Hash;
 use App\Models\PreguntaSecreta;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 
 class UsuariosContoller extends Controller
@@ -41,7 +42,7 @@ class UsuariosContoller extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    
+
 
 
     public function store(Request $request)
@@ -110,6 +111,84 @@ class UsuariosContoller extends Controller
 
         return view('sesiones.iniciar');
     }
+
+
+    public function crearusuario(Request $request)
+    {
+        // Validar los datos recibidos en la solicitud
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|string|max:255|regex:/^[A-ZÁÉÍÓÚÜ][a-záéíóúü]+$/u',
+            'apaterno' => 'required|string|max:255|regex:/^[A-ZÁÉÍÓÚÜ][a-záéíóúü]+$/u',
+            'amaterno' => 'required|string|max:255|regex:/^[A-ZÁÉÍÓÚÜ][a-záéíóúü]+$/u',
+            'telefono' => 'required|numeric|digits:10',
+            'email' => 'required|email|max:255|unique:tbl_usuarios',
+            'direccion' => 'required|string|max:255',
+            'nombre_usuario' => 'required|string|max:255|unique:tbl_usuarios',
+            'idpreguntasecreta' => 'required',
+            'respuesta' => 'required|string|max:255',
+            'password' => 'required|string|min:8',
+        ]);
+
+        // Buscar el horario correspondiente a la hora ingresada
+        // $preguntasecreta = PreguntaSecreta::where('pregunta', $request->idpreguntasecreta)->first();
+
+        // Validar si ambos ya existen
+        $validator->after(function ($validator) use ($request) {
+            if ($this->nombreUsuarioExiste($request->nombre_usuario) && $this->emailExiste($request->email)) {
+                $validator->errors()->add('usuario', 'El correo y nombre de usuario ya existen.');
+            }
+        });
+
+        // Validar si el correo electrónico ya existe
+        $validator->after(function ($validator) use ($request) {
+            if ($this->emailExiste($request->email)) {
+                $validator->errors()->add('usuario', 'El correo electrónico ya está registrado.');
+            }
+        });
+
+        // Validar si el nombre de usuario ya existe
+        $validator->after(function ($validator) use ($request) {
+            if ($this->nombreUsuarioExiste($request->nombre_usuario)) {
+                $validator->errors()->add('usuario', 'El nombre de usuario ya existe.');
+            }
+        });
+
+
+        // Si la validación falla, devolver una respuesta JSON con los errores
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->first('usuario')], 400);
+        }
+
+        // Resto del código para guardar el usuario
+        $usuario = new Usuarios();
+        $usuario->nombre = $request->nombre;
+        $usuario->apaterno = $request->apaterno;
+        $usuario->amaterno = $request->amaterno;
+        $usuario->telefono = $request->telefono;
+        $usuario->email = $request->email;
+        $usuario->direccion = $request->direccion;
+        $usuario->nombre_usuario = $request->nombre_usuario;
+        $usuario->idpreguntasecreta = $request->idpreguntasecreta;
+        $usuario->respuesta = $request->respuesta;
+        $usuario->password = Hash::make($request->password);
+        $usuario->remember_token = Str::random(60); // Agregar remember_token con valor aleatorio
+        $usuario->save();
+
+        return response()->json(['message' => 'Usuario registrado exitosamente.'], 201);
+    }
+
+    // Función para verificar si el nombre de usuario ya existe
+    private function nombreUsuarioExiste($nombreUsuario)
+    {
+        return Usuarios::where('nombre_usuario', $nombreUsuario)->exists();
+    }
+
+    // Función para verificar si el correo electrónico ya existe
+    private function emailExiste($email)
+    {
+        return Usuarios::where('email', $email)->exists();
+    }
+
 
 
     /**

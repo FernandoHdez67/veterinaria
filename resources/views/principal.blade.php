@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cachorro PET es una aplicacion que 
+    <meta name="description" content="Cachorro PET es una aplicacion que
     ayuda a los usuarios a mejorar su experiencia de servicios y compras
     de productos de la clinica veterinaria">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -102,18 +102,10 @@
                         </li>
 
                         <li class="nav-item">
-                         
-                            @if (session()->has('idusuario'))
-                            <form action="{{ route('logoute') }}" method="POST">
-                                @csrf
-                                <a style="color: white"
+                            <a style="color: white"
                                 class="nav-link <?php if(Route::current()->getName() == 'citas') echo 'active-link'; ?> hvr-underline-from-left"
                                 aria-current="page" href="<?= Route('citas') ?>"><b><i
                                         class="fa-regular fa-calendar-days"></i> Citas</b></a>
-                            </form>
-                            @else
-                            <a></a>
-                            @endif
                         </li>
                         <li class="nav-item">
                             <a style="color: white"
@@ -128,11 +120,25 @@
                     </a>
                     {{-- <img src="{{ asset('img/carrito2.png') }}" width="40px" height="30px" alt=""> --}}
                     @if (session()->has('idusuario'))
-                    <form action="{{ route('logoute') }}" method="POST">
-                        @csrf
-                        <button class="btn btn-rojopet" type="submit"><b><i
-                                    class="fa-solid fa-right-from-bracket fa-rotate-180"></i> Cerrar sesión</b></button>
-                    </form>
+                    <div class="btn-group dropstart">
+                        <a class="btn btn-rojopet dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-regular fa-user"></i> <b>{{ session('nombreUsuario') }}</b>
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" href="{{ route('perfilusuario.editar') }}"><i
+                                        class="fa-solid fa-user"></i> Mi perfil</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-calendar-check"></i> Mis
+                                    citas</a></li>
+                            <form action="{{ route('logoute') }}" method="POST">
+                                @csrf
+                                <button class="dropdown-item" type="submit"><i
+                                        class="fa-solid fa-right-from-bracket"></i> Cerrar sesion</button>
+                            </form>
+                        </ul>
+                    </div>
+
                     @else
                     <a class="btn btn-rojopet" href="{{ route('iniciar') }}"><b style="color: white"><i
                                 class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión</b></a>

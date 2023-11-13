@@ -6,11 +6,11 @@
 {{ Breadcrumbs::render('inicio') }}
 
 <div class="container" style="margin-top: 15px">
-    @if(session()->has('idusuario'))
-    <h5 class="d-flex justify-content-end">Bienvenido de nuevo!</h5>
+    {{-- @if(session()->has('idusuario'))
+    <h5 class="d-flex justify-content-end">Bienvenido de nuevo, {{ session('nombreUsuario') }}!</h5>
     @else
     <p></p>
-    @endif
+    @endif --}}
 
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">

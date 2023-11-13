@@ -289,7 +289,7 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Menu-Configuration
     |
     */
-    
+
     'menu' => [
         // Navbar items:
 
@@ -313,7 +313,7 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
-        
+
         [
             'text' => 'Tablero',
             'route'  => 'dashboard',
@@ -369,7 +369,7 @@ return [
             'route'  => 'profile.edit',
             'icon' => 'fas fa-fw fa-user-pen'
         ],
-        
+
     ],
 
     /*

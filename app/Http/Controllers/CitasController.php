@@ -150,7 +150,8 @@ class CitasController extends Controller
 
         $cita = Citas::create($citaData);
 
-        return redirect()->route('citas')->with('success', 'Su cita ha sido registrada.');
+        // Después de crear la cita
+        return redirect()->route('citas')->with('success', 'Su cita ha sido registrada.')->with('mostrar_encuesta', true);
     }
 
     public function obtener_citas()
@@ -178,6 +179,8 @@ class CitasController extends Controller
 
         return response()->json($eventos);
     }
+
+
     /**
      * Display the specified resource.
      *

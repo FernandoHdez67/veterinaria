@@ -328,3 +328,15 @@ Route::get('/offline', function () {
 // Route::get('/', function () {
 //     return view('splashscreen');
 // })->name('splash');
+
+//Route::get('/encuesta', [App\Http\Controllers\CitasController::class, 'encuesta'])->name('encuesta');
+
+
+
+Route::get('/perfil/editar', [App\Http\Controllers\PerfilUsuario::class,'editar'])->name('perfilusuario.editar');
+Route::put('/perfil/actualizar', [App\Http\Controllers\PerfilUsuario::class,'actualizar'])->name('perfilusuario.actualizar');
+
+Route::get('/perfil/editar', [App\Http\Controllers\PerfilUsuario::class,'editar'])->name('perfilusuario.editar');
+
+
+

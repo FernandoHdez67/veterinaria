@@ -34,13 +34,13 @@ Route::post('/citas', [App\Http\Controllers\CitassController::class,'store']); /
 Route::put('/citas/{id}', [App\Http\Controllers\CitassController::class,'update']); // actualiza un registro
 Route::delete('/citas/{id}', [App\Http\Controllers\CitassController::class,'destroy']); //elimina un registro por id
 
-Route::get('/fechas', [App\Http\Controllers\CitassController::class,'buscarFechas']); //Buscar por rango de fechas 
+Route::get('/fechas', [App\Http\Controllers\CitassController::class,'buscarFechas']); //Buscar por rango de fechas
 Route::get('/buscar-fechas', [App\Http\Controllers\CitassController::class,'buscaFechaEspecifica']); //Buscar por fecha especifica
 Route::get('/cita', [App\Http\Controllers\CitassController::class,'buscaFechaPorId']); //Buscar por Id
 Route::get('/citas-del-dia', [App\Http\Controllers\CitassController::class,'citasDeHoy']); //Mostrar citas del dia de hoy
 Route::get('/citas-de-manana', [App\Http\Controllers\CitassController::class,'citasDeManana']); //Mostrar citas del dia de mañana
-Route::get('/cita-mes', [App\Http\Controllers\CitassController::class,'citasPorMesNumero']); //Mostrar citas por numero de mes 
-Route::get('/cita-del-mes', [App\Http\Controllers\CitassController::class,'citasPorMesNombre']); //Mostrar citas por nombre del mes 
+Route::get('/cita-mes', [App\Http\Controllers\CitassController::class,'citasPorMesNumero']); //Mostrar citas por numero de mes
+Route::get('/cita-del-mes', [App\Http\Controllers\CitassController::class,'citasPorMesNombre']); //Mostrar citas por nombre del mes
 Route::get('/citas-dia', [App\Http\Controllers\CitassController::class,'citasPorDiaDelMes']); //Mostrar citas por dia de la semana
 Route::delete('/eliminar-cita', [App\Http\Controllers\CitassController::class,'eliminarCitaPorFechaHora']); //elimina un registro por fecha y hora
 
@@ -62,3 +62,6 @@ Route::get('/carrusel', [App\Http\Controllers\CarruselController::class,'index']
 Route::get('/ayuda', [App\Http\Controllers\AyudaController::class,'apipregunta']); //muestra todos los registros
 
 Route::get('/categorias', [App\Http\Controllers\CategoriaController::class,'listacategorias']); //muestra todos los registros
+
+Route::post('/crearusuario', [App\Http\Controllers\UsuariosContoller::class,'crearusuario']);
+
