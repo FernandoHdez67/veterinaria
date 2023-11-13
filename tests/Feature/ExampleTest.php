@@ -1,5 +1,7 @@
 <?php
 
 test('example', function () {
-    expect(true)->toBeTrue();
+    $response = $this->get('/');
+
+    $response->assertStatus(200);
 });
