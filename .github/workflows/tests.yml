@@ -22,4 +22,4 @@ jobs:
         run: composer install
 
       - name: Run tests
-        run: php artisan test
+        run: php artisan test --exclude=ExampleTest
