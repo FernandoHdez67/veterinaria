@@ -7,22 +7,23 @@ on:
   pull_request:
     branches:
       - master
+
 jobs:
-    tests:
-          runs-on: ubuntu-latest
-          steps:
-            - uses: actions/checkout@v2
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                php-version: 8.1
-                coverage: true
-            - name: Install dependencies
-              run: composer install
-            - name: Run tests
-              run: phpunit --coverage-html=tests/coverage
-            - name: Upload coverage report
-              uses: actions/upload-artifact@v2
-              with:
-                name: coverage-report
-                path: tests/coverage
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: composer install
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          coverage: true
+      - name: Run tests
+        run: phpunit --coverage-html=tests/coverage
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-report
+          path: tests/coverage
